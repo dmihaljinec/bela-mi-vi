@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		>
+		<TextView
+		    android:id="@+id/team1"
+		    android:layout_weight="1"
+			android:layout_width="0dip"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="2dip"
+		    android:paddingBottom="2dip"
+		    android:paddingLeft="5dip"
+		    android:gravity="left"
+		    android:text="@string/team1"
+		    style="?android:attr/listSeparatorTextViewStyle"
+		    />
+		<TextView
+		    android:id="@+id/team2"
+		    android:layout_weight="1"
+			android:layout_width="0dip"
+		    android:layout_height="wrap_content"
+		    android:paddingTop="2dip"
+		    android:paddingBottom="2dip"
+		    android:paddingRight="5dip"
+		    android:gravity="right"
+		    android:text="@string/team2"
+		    style="?android:attr/listSeparatorTextViewStyle"
+		    />
+	</LinearLayout>
+	<ListView
+		android:id="@+id/game_list"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		/>
+</LinearLayout>
