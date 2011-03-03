@@ -83,13 +83,13 @@
 	<!-- NewGameActivity -->
 	<string name="new_game_activity_title">Nova igra</string>
 	<string name="game_points">Bodova u igri</string>
-	<string name="declaration_team">Tim koji je zvao</string>
+	<string name="declaration_team">Tim koji je imao zvanje</string>
 	<string name="declarations">Zvanja</string>
 	<string name="points">Bodovi</string>
 	<string name="all_tricks">Štigla</string>
 	<string name="bela">Bela</string>
 	<!--  Help dialog -->
-	<string name="new_game_activity_help_message">Ukoliko je više od 162 bodova u igri, znači da je ili bilo zvanja ili je bila štigla.\n\nOdredite tim koji je zvao pritiskom na tipku Mi ili Vi . Sa +20 i +50 tipkama unesite ukupnu vrijednost zvanja odabranog tima. Ukoliko je suprotni tim zvao Belu, pritisnite \'Bela\' potvrdnu tipku. Prebacivanje tima koji je zvao vratiti će početnu vrijednost bodovima u igri.\n\nUkoliko su svi štihovi završli kod jednog tima, pritisnite \'Štigla\' potvrdnu tipku.\n\nUnesite bodove samo za jedan tim, suprotni će biti automatski izračunat prema veličini igre. Ukoliko je bilo zvanja, ona neće biti automatski pridodana bodovima tima.</string>
+	<string name="new_game_activity_help_message">Ukoliko je više od 162 bodova u igri, znači da je ili bilo zvanja ili je bila štigla.\n\nOdredite tim koji je imao zvanje pritiskom na tipku Mi ili Vi . Sa +20 i +50 tipkama unesite ukupnu vrijednost zvanja odabranog tima. Ukoliko je suprotni tim zvao Belu, pritisnite \'Bela\' potvrdnu tipku. Prebacivanje tima koji je zvao vratiti će početnu vrijednost bodovima u igri.\n\nUkoliko su svi štihovi završli kod jednog tima, pritisnite \'Štigla\' potvrdnu tipku.\n\nUnesite bodove samo za jedan tim, suprotni će biti automatski izračunat prema veličini igre. Ukoliko je bilo zvanja, ona neće biti automatski pridodana bodovima tima.</string>
 
 	<!-- StatisticsActivity -->
 	<string name="statistics_activity_title">Statistika meča</string>
