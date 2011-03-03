@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- MatchListActivity -->
+	<string name="match_list_activity_title">List of matches</string>
+	<string name="new_match">New match</string>
+	<string name="list_footer">More</string>
+	<!-- Options menu -->
+	<string name="remove_all_matches">Delete all</string>
+	<!--  Context menu -->
+	<string name="remove_match">Delete</string>
+	<!-- Delete match confirmation dialog -->
+	<string name="match_delete_conformation">Match will be deleted</string>
+	<!-- Delete all matches confirmation dialog -->
+	<string name="match_delete_all_conformation">All matches will be deleted</string>
+	<!-- Not enough players dialog -->
+	<string name="not_enough_players">In order to add a new match you need to have at least 4 players defined. Select \'List of players\' from options menu and add more players.</string>
+	<!--  Help dialog -->
+	<string name="match_list_activity_help_message">Add a new match by pressing \'New match\' button on top of the screen or by selecting \'New match\' from options menu. Latest match will be shown at the top of the list.\n\nPress a match in a list in order to get match details.\n\nDelete single match by long pressing it or delete all matches by selecting \'Delete all\' from options menu.\n\nTo manage players select \'List of players\' from options menu.</string>
+
+	<!-- PlayerListActivity -->
+	<string name="player_list_activity_title">List of players</string>
+	<string name="winning_rate">Sets winning rate</string>
+	<!-- Options menu -->
+	<string name="new_player">New player</string>
+	<string name="remove_all_players">Delete all</string>
+	<!-- Context menu -->
+	<string name="remove_player">Delete</string>
+	<!-- Delete player confirmation dialog -->
+	<string name="player_delete_conformation">Player will be deleted</string>
+	<!-- Delete all players confirmation dialog -->
+	<string name="player_delete_all_conformation">All players will be deleted</string>
+	<!-- New player dialog -->
+	<string name="enter_player_name">Enter player name</string>
+	<!--  Help dialog -->
+	<string name="player_list_activity_help_message">Add a new player by pressing \'New player\' button on top of the screen or by selecting \'New player\' from options menu. Player name must be unique. Players are sorted ascending by name in the list. There is a statistic for each player in the list which shows how many sets did he played and how many did he won.\n\nDelete single player by long pressing it or delete all players by selecting \'Delete all\' from options menu.\n\nWARNING\nYou should only delete players that aren\'t connected to any match otherwise match will irreversibly lose connection to that player.</string>
+
+	<!-- MatchActivity -->
+	<string name="match_activity_title">Match</string>
+	<string name="game_result">Total</string>
+	<string name="difference">Difference</string>
+	<!--  Help dialog -->
+	<string name="match_activity_help_message">Top of the screen shows sides and current sets result.\n\nAdd a new game by pressing \'New game\' button on top of the screen or by selecting \'New game\' from options menu. Latest game will be shown at the bottom of the list.\n\nAt the bottom of the screen there\'s total game points in current set along with difference between sides.\n\nDelete game by long pressing it.\n\nTo see list of sets in current match select \'List of sets\' from options menu.\n\nTo see match statistics select \'Match statistics\' from options menu.</string>
+
+	<!-- Global -->
+	<string name="app_name">BelaMiVi</string>
+	<string name="team1">Team 1</string>
+	<string name="team2">Team 2</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
+	<string name="help">Help</string>
+	<string name="warning">Warning</string>
+	<string name="close">Close</string>
+
+	<!-- GameActivity -->
+	<string name="game_activity_title">List of games</string>
+	<!--  Help dialog -->
+	<string name="game_activity_help_message">Chronologically displays list of games. It\'s possible to delete a game by long pressing it but only if this is the last set in a match.</string>
+
+	<!-- GameList -->
+	<string name="new_game">New game</string>
+	<!-- Delete game confirmation dialog -->
+	<string name="remove_game">Delete</string>
+	<string name="game_delete_conformation">Game will be deleted</string>
+
+	<!-- SetListActivity -->
+	<string name="set_list_activity_title">List of sets</string>
+	<!--  Help dialog -->
+	<string name="set_list_activity_help_message">Chronologically displays list of sets in a current match. Press on desired set to see a list of games from that set.</string>
+
+	<!-- NewMatchActivity -->
+	<string name="new_match_activity_title">New match</string>
+	<string name="creation_date">Creation date</string>
+	<string name="team1_players">Team 1 players</string>
+	<string name="team2_players">Team 2 players</string>
+	<string name="set_limit">Set limit</string>
+	<string name="players">Players</string>
+	<!--  Help dialog -->
+	<string name="new_match_activity_help_message">Select Team 1 and Team 2 players. All players must be different in order to create a match.\n\nTo change set limit for current match edit \'Set limit\' value.</string>
+
+	<!-- NewGameActivity -->
+	<string name="new_game_activity_title">New game</string>
+	<string name="game_points">Game points</string>
+	<string name="declaration_team">Declaration team</string>
+	<string name="declarations">Declarations</string>
+	<string name="points">Points</string>
+	<string name="all_tricks">All Tricks</string>
+	<string name="bela">Bela</string>
+	<!--  Help dialog -->
+	<string name="new_game_activity_help_message">In a game where game points are different from default there was either declarations or all tricks.\n\nTo set declarations select side by pressing declaration team radio button. With +20 and +50 buttons enter declarations value. If opposite team declared Bela, press \'Bela\' check box. Switching between declaration teams will reset game points to default.\n\nIf game ended with all tricks owned by one team, press \'All tricks\' check box.\n\nEnter team points only for one side, other will be calculated automatically based on game points. Take into account that declarations are not added to team points automatically.</string>
+
+	<!-- StatisticsActivity -->
+	<string name="statistics_activity_title">Match statistics</string>
+	<string name="chosen_trump">Chosen trump</string>
+	<string name="winnings">Passed games</string>
+	<string name="sets">Sets</string>
+	<!--  Help dialog -->
+	<string name="statistics_activity_help_message">Chosen trump\nIt\'s a rate between total number of games and number of games that certain side chosen trump.\n\nPassed games\nIt\'s a rate between chosen trump and passed games.</string>
+</resources>

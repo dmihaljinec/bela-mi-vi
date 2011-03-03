@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+    	android:id="@+id/list_of_sets"
+		android:title="@string/set_list_activity_title"
+		android:icon="@drawable/ic_menu_list"
+		/>
+	<item
+		android:id="@+id/new_game"
+		android:title="@string/new_game_activity_title"
+		android:icon="@drawable/ic_menu_add"
+		/>
+	<item
+    	android:id="@+id/match_statistics"
+		android:title="@string/statistics_activity_title"
+		android:icon="@drawable/ic_menu_info_details"
+		/>
+	<item
+		android:id="@+id/help"
+		android:title="@string/help"
+		android:icon="@drawable/ic_menu_help"
+		/>
+</menu>

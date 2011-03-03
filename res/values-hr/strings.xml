@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- MatchListActivity -->
+	<string name="match_list_activity_title">Lista mečeva</string>
+	<string name="new_match">Novi meč</string>
+	<string name="list_footer">Više</string>
+	<!-- Options menu -->
+	<string name="remove_all_matches">Obriši sve</string>
+	<!--  Context menu -->
+	<string name="remove_match">Obriši</string>
+	<!-- Delete match confirmation dialog -->
+	<string name="match_delete_conformation">Meč će biti obrisan</string>
+	<!-- Delete all matches confirmation dialog -->
+	<string name="match_delete_all_conformation">Svi mečevi će biti obrisani</string>
+	<!-- Not enough players dialog -->
+	<string name="not_enough_players">Da biste dodali novi meč morate imati unešena barem 4 igrača. Odaberite \'Lista igrača\' iz izbornika i dodajte još igrača.</string>
+	<!--  Help dialog -->
+	<string name="match_list_activity_help_message">Dodajte novi meč pritiskom na tipku \'Novi meč\' koja se nalazi pri vrhu ekrana ili odaberite \'Novi meč\' iz izbornika. Posljednje dodani meč nalazi se na vrhu liste.\n\nPritiskom na željeni meč u listi dobiti ćete detalje meča.\n\nBrisanje pojedinog meča moguće je dugim pristiskom na željeni meč, a za brisanje svih mečeva odaberite \'Obriši sve\' iz izbornika.\n\nZa upravljanje igračima odaberite \'Lista igrača\' iz izbornika.</string>
+
+	<!-- PlayerListActivity -->
+	<string name="player_list_activity_title">Lista igrača</string>
+	<string name="winning_rate">Dobivene partije</string>
+	<!-- Options menu -->
+	<string name="new_player">Novi igrač</string>
+	<string name="remove_all_players">Obriši sve</string>
+	<!-- Context menu -->
+	<string name="remove_player">Obriši</string>
+	<!-- Delete player confirmation dialog -->
+	<string name="player_delete_conformation">Igrač će biti obrisan</string>
+	<!-- Delete all players confirmation dialog -->
+	<string name="player_delete_all_conformation">Svi igrači će biti obrisani</string>
+	<!-- New player dialog -->
+	<string name="enter_player_name">Unesite ime igrača</string>
+	<!--  Help dialog -->
+	<string name="player_list_activity_help_message">Dodajte novog igrača pritiskom na tipku \'Novi igrač\' koja se nalazi pri vrhu ekrana ili odaberite \'Novi igrač\' iz izbornika. Ime igrača mora biti jedinstveno. Igrači u listi su poredani abecedno prema imenu. Za svakog igrača u listi prikazuje se statistika koliko je partija dobio od ukupno odigranih partija.\n\nBrisanje pojedinog igrača moguće je dugim pristiskom na željenog igrača u listi, a za brisanje svih igrača odaberite \'Obriši sve\' iz izbornika.\n\nUPOZORENJE\nBrišite igrače koji nisu povezani sa nekim mečem, jer u suprotnom meč će nepovratno izgubiti informaciju o igraču.</string>
+
+	<!-- MatchActivity -->
+	<string name="match_activity_title">Meč</string>
+	<string name="game_result">Zbroj</string>
+	<string name="difference">Razlika</string>
+	<!--  Help dialog -->
+	<string name="match_activity_help_message">Na vrhu ekrana nalazi se popis strana te trenutni rezultat u partijama.\n\nDodajte novu igru pritiskom na tipku \'Nova igra\' koja se nalazi pri vrhu ekrana ili odaberite \'Nova igra\' iz izbornika. Poredak igara u listi je kronološki.\n\nNa dnu ekrana nalazi se zbroj svih igara u trenutnoj partiji te razlika između strana.\n\nBrisanje igre moguće je dugim pristiskom na željenu igru u listi.\n\nZa listu svih partija u trenutnom meču odaberite \'Lista partija\' iz izbornika.\n\nZa pregled statistike trenutnog meča odaberite \'Statistika meča\' iz izbornika.</string>
+
+	<!-- Global -->
+	<string name="app_name">BelaMiVi</string>
+	<string name="team1">Mi</string>
+	<string name="team2">Vi</string>
+	<string name="ok">U redu</string>
+	<string name="cancel">Odustani</string>
+	<string name="yes">Da</string>
+	<string name="no">Ne</string>
+	<string name="help">Pomoć</string>
+	<string name="warning">Upozorenje</string>
+	<string name="close">Zatvori</string>
+
+	<!-- GameActivity -->
+	<string name="game_activity_title">Lista igara</string>
+	<!--  Help dialog -->
+	<string name="game_activity_help_message">Prikazuje listu igara u trenutnoj partiji, poredane kronološki. Dugim pritiskom na željenu igru, moguće ju je obrisati, ali isključivo ukoliko je trenutna lista igara iz posljednje partije u meču.</string>
+
+	<!-- GameList -->
+	<string name="new_game">Nova igra</string>
+	<!-- Delete game confirmation dialog -->
+	<string name="remove_game">Obriši</string>
+	<string name="game_delete_conformation">Igra će biti obrisana</string>
+
+	<!-- SetListActivity -->
+	<string name="set_list_activity_title">Lista partija</string>
+	<!--  Help dialog -->
+	<string name="set_list_activity_help_message">Prikazuje listu partija u trenutnom meču, poredane kronološki. Pritisnite željenu partiju za prikaz liste igara iz te partije.</string>
+
+	<!-- NewMatchActivity -->
+	<string name="new_match_activity_title">Novi meč</string>
+	<string name="creation_date">Datum stvaranja</string>
+	<string name="team1_players">Mi igrači</string>
+	<string name="team2_players">Vi igrači</string>
+	<string name="set_limit">Partija se igra do</string>
+	<string name="players">Igrači</string>
+	<!--  Help dialog -->
+	<string name="new_match_activity_help_message">Odaberite igrače za Mi i Vi stranu. Meč zahtjeva da su svi igrači različiti.\n\nZa promjenu veličine partije u novom meču uredite \'Partija se igra do\' vrijednost.</string>
+
+	<!-- NewGameActivity -->
+	<string name="new_game_activity_title">Nova igra</string>
+	<string name="game_points">Bodova u igri</string>
+	<string name="declaration_team">Tim koji je zvao</string>
+	<string name="declarations">Zvanja</string>
+	<string name="points">Bodovi</string>
+	<string name="all_tricks">Štigla</string>
+	<string name="bela">Bela</string>
+	<!--  Help dialog -->
+	<string name="new_game_activity_help_message">Ukoliko je više od 162 bodova u igri, znači da je ili bilo zvanja ili je bila štigla.\n\nOdredite tim koji je zvao pritiskom na tipku Mi ili Vi . Sa +20 i +50 tipkama unesite ukupnu vrijednost zvanja odabranog tima. Ukoliko je suprotni tim zvao Belu, pritisnite \'Bela\' potvrdnu tipku. Prebacivanje tima koji je zvao vratiti će početnu vrijednost bodovima u igri.\n\nUkoliko su svi štihovi završli kod jednog tima, pritisnite \'Štigla\' potvrdnu tipku.\n\nUnesite bodove samo za jedan tim, suprotni će biti automatski izračunat prema veličini igre. Ukoliko je bilo zvanja, ona neće biti automatski pridodana bodovima tima.</string>
+
+	<!-- StatisticsActivity -->
+	<string name="statistics_activity_title">Statistika meča</string>
+	<string name="chosen_trump">Odabran adut</string>
+	<string name="winnings">Prolaznost</string>
+	<string name="sets">Partije</string>
+	<!--  Help dialog -->
+	<string name="statistics_activity_help_message">Odabran adut\nOmjer broja igara kada je određena strana odabrala adut sa ukupnim brojem igara.\n\nProlaznost\nOmjer broja igara gdje je određena strana prošla sa brojem igara gdje je odabrala adut.</string>
+</resources>
