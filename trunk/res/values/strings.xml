@@ -2,11 +2,11 @@
 <resources>
 
 	<!-- MatchListActivity -->
-	<string name="match_list_activity_title">List of matches</string>
-	<string name="new_match">New match</string>
+	<string name="match_list_activity_title">List of Matches</string>
+	<string name="new_match">New Match</string>
 	<string name="list_footer">More</string>
 	<!-- Options menu -->
-	<string name="remove_all_matches">Delete all</string>
+	<string name="remove_all_matches">Delete All</string>
 	<!--  Context menu -->
 	<string name="remove_match">Delete</string>
 	<!-- Delete match confirmation dialog -->
@@ -14,16 +14,16 @@
 	<!-- Delete all matches confirmation dialog -->
 	<string name="match_delete_all_conformation">All matches will be deleted</string>
 	<!-- Not enough players dialog -->
-	<string name="not_enough_players">In order to add a new match you need to have at least 4 players defined. Select \'List of players\' from options menu and add more players.</string>
+	<string name="not_enough_players">In order to add a new match you need to have at least 4 players defined. Select \'List of Players\' from the options menu and add more players.</string>
 	<!--  Help dialog -->
-	<string name="match_list_activity_help_message">Add a new match by pressing \'New match\' button on top of the screen or by selecting \'New match\' from options menu. Latest match will be shown at the top of the list.\n\nPress match in a list in order to get match details.\n\nDelete single match by long pressing it or delete all matches by selecting \'Delete all\' from options menu.\n\nTo manage players select \'List of players\' from the options menu.</string>
+	<string name="match_list_activity_help_message">Add a new match by pressing \'New Match\' button on top of the screen or by selecting \'New Match\' from the options menu. Latest match will be shown at the top of the list.\n\nPress match in a list in order to get match details.\n\nDelete single match by long pressing it or delete all matches by selecting \'Delete All\' from the options menu.\n\nTo manage players select \'List of Players\' from the options menu.</string>
 
 	<!-- PlayerListActivity -->
-	<string name="player_list_activity_title">List of players</string>
+	<string name="player_list_activity_title">List of Players</string>
 	<string name="winning_rate">Sets winning rate</string>
 	<!-- Options menu -->
-	<string name="new_player">New player</string>
-	<string name="remove_all_players">Delete all</string>
+	<string name="new_player">New Player</string>
+	<string name="remove_all_players">Delete All</string>
 	<!-- Context menu -->
 	<string name="remove_player">Delete</string>
 	<!-- Delete player confirmation dialog -->
@@ -33,14 +33,14 @@
 	<!-- New player dialog -->
 	<string name="enter_player_name">Enter player name</string>
 	<!--  Help dialog -->
-	<string name="player_list_activity_help_message">Add a new player by pressing \'New player\' button on top of the screen or by selecting \'New player\' from the options menu. Player name must be unique. Players are sorted alphabetically. There is a statistical data for each player in the list which shows how many he has played and how many has he won.\n\nDelete single player by long pressing it or delete all players by selecting \'Delete all\' from options menu.\n\nWARNING\nYou should only delete players that aren\'t connected to any match otherwise match will not be able to retrieve connection to that player.</string>
+	<string name="player_list_activity_help_message">Add a new player by pressing \'New Player\' button on top of the screen or by selecting \'New Player\' from the options menu. Player name must be unique. Players are sorted alphabetically. There is a statistical data for each player in the list which shows how many he has played and how many has he won.\n\nDelete single player by long pressing it or delete all players by selecting \'Delete All\' from the options menu.\n\nWARNING\nYou should only delete players that aren\'t connected to any match otherwise match will not be able to retrieve connection to that player.</string>
 
 	<!-- MatchActivity -->
 	<string name="match_activity_title">Match</string>
 	<string name="game_result">Total</string>
 	<string name="difference">Difference</string>
 	<!--  Help dialog -->
-	<string name="match_activity_help_message">Top of the screen shows sides and current sets result.\n\nAdd a new game by pressing \'New game\' button on top of the screen or by selecting \'New game\' from the options menu. The latest game will be shown at the bottom of the list.\n\nAt the bottom of the screen there\'s a number of total game points in current set along with the difference between sides.\n\nDelete game by long pressing it.\n\nTo see list of sets in current match select \'List of sets\' from the options menu.\n\nTo see match statistics select \'Match statistics\' from the options menu.</string>
+	<string name="match_activity_help_message">Top of the screen shows sides and current sets result.\n\nAdd a new game by pressing \'New Game\' button on top of the screen or by selecting \'New Game\' from the options menu. The latest game will be shown at the bottom of the list.\n\nAt the bottom of the screen there\'s a number of total game points in current set along with the difference between sides.\n\nDelete game by long pressing it.\n\nTo see list of sets in current match select \'List of Sets\' from the options menu.\n\nTo see match statistics select \'Match Statistics\' from the options menu.</string>
 
 	<!-- Global -->
 	<string name="app_name">BelaMiVi</string>
@@ -55,47 +55,47 @@
 	<string name="close">Close</string>
 
 	<!-- GameActivity -->
-	<string name="game_activity_title">List of games</string>
+	<string name="game_activity_title">List of Games</string>
 	<!--  Help dialog -->
 	<string name="game_activity_help_message">Displays list of games chronologically. It\'s possible to delete game by long pressing it but only if this is the last set in a match.</string>
 
 	<!-- GameList -->
-	<string name="new_game">New game</string>
+	<string name="new_game">New Game</string>
 	<!-- Delete game confirmation dialog -->
 	<string name="remove_game">Delete</string>
 	<string name="game_delete_conformation">Game will be deleted</string>
 
 	<!-- SetListActivity -->
-	<string name="set_list_activity_title">List of sets</string>
+	<string name="set_list_activity_title">List of Sets</string>
 	<!--  Help dialog -->
 	<string name="set_list_activity_help_message">Displays list of sets chronologically in a current match. Press desired set to see a list of games in that particular set.</string>
 
 	<!-- NewMatchActivity -->
-	<string name="new_match_activity_title">New match</string>
-	<string name="creation_date">Creation date</string>
-	<string name="team1_players">Team 1 players</string>
-	<string name="team2_players">Team 2 players</string>
-	<string name="set_limit">Set limit</string>
+	<string name="new_match_activity_title">New Match</string>
+	<string name="creation_date">Creation Date</string>
+	<string name="team1_players">Team 1 Players</string>
+	<string name="team2_players">Team 2 Players</string>
+	<string name="set_limit">Set Limit</string>
 	<string name="players">Players</string>
 	<!--  Help dialog -->
-	<string name="new_match_activity_help_message">Select Team 1 and Team 2 players. Players must vary in order to create a match.\n\nTo change set limit for current match edit \'Set limit\' value.</string>
+	<string name="new_match_activity_help_message">Select Team 1 and Team 2 players. Players must vary in order to create a match.\n\nTo change set limit for current match edit \'Set Limit\' value.</string>
 
 	<!-- NewGameActivity -->
-	<string name="new_game_activity_title">New game</string>
-	<string name="game_points">Game points</string>
-	<string name="declaration_team">Declaration team</string>
+	<string name="new_game_activity_title">New Game</string>
+	<string name="game_points">Game Points</string>
+	<string name="declaration_team">Declaration Team</string>
 	<string name="declarations">Declarations</string>
 	<string name="points">Points</string>
 	<string name="all_tricks">All Tricks</string>
 	<string name="bela">Bela</string>
 	<!--  Help dialog -->
-	<string name="new_game_activity_help_message">In a game where game points vary from default value, there were either declarations or all tricks.\n\nTo set declarations select side by pressing declaration team radio button. With +20 and +50 buttons enter declarations value. If opposite team declared Bela, press \'Bela\' check box. Switching between declaration teams will reset game points to default.\n\nIf game ended with all tricks owned by one team, press \'All tricks\' check box.\n\nEnter team points only for one side, other will be calculated automatically based on game points. Take into account that declarations are not added to team points automatically.</string>
+	<string name="new_game_activity_help_message">In a game where game points vary from default value, there were either declarations or all tricks.\n\nTo set declarations select side by pressing declaration team radio button. With +20 and +50 buttons enter declarations value. If opposite team declared Bela, press \'Bela\' check box. Switching between declaration teams will reset game points to default.\n\nIf game ended with all tricks owned by one team, press \'All Tricks\' check box.\n\nEnter team points only for one side, other will be calculated automatically based on game points. Take into account that declarations are not added to team points automatically.</string>
 
 	<!-- StatisticsActivity -->
-	<string name="statistics_activity_title">Match statistics</string>
-	<string name="chosen_trump">Chosen trump</string>
-	<string name="winnings">Passed games</string>
+	<string name="statistics_activity_title">Match Statistics</string>
+	<string name="chosen_trump">Chosen Trump</string>
+	<string name="winnings">Passed Games</string>
 	<string name="sets">Sets</string>
 	<!--  Help dialog -->
-	<string name="statistics_activity_help_message">Chosen trump\nIt\'s a rate between total number of games and number of games in which certain side chose trump.\n\nPassed games\nIt\'s a rate between number of times that certain trump was chosen and games in which sufficient number of points was obtained.</string>
+	<string name="statistics_activity_help_message">Chosen Trump\nIt\'s a rate between total number of games and number of games in which certain side chose trump.\n\nPassed Games\nIt\'s a rate between number of times that certain trump was chosen and games in which sufficient number of points was obtained.</string>
 </resources>
