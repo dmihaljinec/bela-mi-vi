@@ -13,5 +13,4 @@
 		android:paddingLeft="5dip"
 		android:background="@drawable/header"
 		/>
-		<!-- android:background="@drawable/custom" -->
 </LinearLayout>
