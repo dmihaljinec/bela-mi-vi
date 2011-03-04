@@ -4,13 +4,9 @@
 	<color name="yellow2">#ADDFFF</color>
 	<color name="orange4">#fff000</color>
 	<color name="orange5">#ffa000</color>
-	<color name="blue1">#ffcfe1ed</color>
-	<color name="blue2">#ff7faaca</color>
-	<color name="blue3">#ff202020</color>
-	<!-- 
-	<color name="blue2">#cccccc</color>
-	<color name="blue25">#777777</color>
-	-->
+	<color name="blue1">#FFCFE1ED</color>
+	<color name="blue2">#FF7FAACA</color>
+	<color name="blue3">#FF202020</color>
 	<color name="grey05">#888888</color>
 	<color name="list_blue">#ADDFFF</color>
 	<color name="grey">#444444</color>

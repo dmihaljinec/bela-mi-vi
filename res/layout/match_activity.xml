@@ -47,22 +47,6 @@
 		    style="?android:attr/listSeparatorTextViewStyle"
 		    />
 	</LinearLayout>
-	<!--
-	<ListView
-		android:id="@+id/set_list"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:layout_alignParentTop="true"
-		/>
-	<TextView 
-		android:id="@+id/sets_result"
-	 	android:layout_width="fill_parent"
-	 	android:layout_height="wrap_content"
-	 	android:textAppearance="?android:attr/textAppearanceLarge"
-	 	android:gravity="center"
-	 	android:layout_alignParentTop="true"
-		/>
-	-->
 	<LinearLayout
 		android:id="@+id/game_score"
 		android:layout_alignParentBottom="true"
