@@ -23,6 +23,11 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This activity handles match details.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class NewMatchActivity extends Activity implements OnClickListener {
 
 	private Data mData;

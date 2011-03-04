@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * This class handles database create, open and upgrade operations.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class BelaOpenHandler extends SQLiteOpenHelper {
 	
 	public BelaOpenHandler(Context context, String dbName, int dbVersion) {

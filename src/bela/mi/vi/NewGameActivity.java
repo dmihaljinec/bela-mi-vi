@@ -16,6 +16,11 @@ import android.widget.RadioButton;
 import android.text.TextWatcher;
 import android.text.Editable;
 
+/**
+ * This activity handles game details.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class NewGameActivity extends Activity implements OnClickListener {
 	
 	private Integer mMatchId;

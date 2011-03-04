@@ -3,6 +3,11 @@ package bela.mi.vi.data;
 import android.content.Context;
 import android.database.Cursor;
 
+/**
+ * This class handles match based database data.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class MatchData extends Data {
 	
 	private Integer mMatchId;
