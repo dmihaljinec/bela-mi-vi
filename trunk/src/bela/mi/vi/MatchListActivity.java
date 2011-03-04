@@ -21,6 +21,12 @@ import android.widget.TextView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.graphics.*;
 
+/**
+ * This activity handles list of matches.
+ * It can initiate a new match activity and remove single or all matches.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class MatchListActivity extends ListActivity{
 	
 	private Data mData;

@@ -5,6 +5,11 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.*;
 
+/**
+ * This class handles SQLite database.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class Data {
 	
 	private BelaOpenHandler belaOpenHandler;
@@ -51,7 +56,7 @@ public class Data {
 	public static final String GAMES_TEAM2_POINTS = "team2_points";
 	
 	protected static final String SQL_CREATE_TABLE_PLAYERS = SQL_CREATE_TABLE + " " + TABLE_PLAYERS + " (" + PLAYERS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + PLAYERS_NAME + " TEXT NOT NULL UNIQUE)";
-	protected static final String SQL_CREATE_TABLE_MATCHES = SQL_CREATE_TABLE + " " + TABLE_MATCHES + " (" + MATCHES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + MATCHES_DATE + " TEXT NOT NULL, " + MATCHES_TIME + " TEXT NOT NULL, " + MATCHES_TEAM1_PLAYER1 + " INTEGER NOT NULL, " + MATCHES_TEAM1_PLAYER2 + " INTEGER NOT NULL, " + MATCHES_TEAM2_PLAYER1 + " INTEGER NOT NULL, " + MATCHES_TEAM2_PLAYER2 + " INTEGER NOT NULL, " + MATCHES_SET_LIMIT + " INTEGER DEFAULT 1001, FOREIGN KEY(" + MATCHES_TEAM1_PLAYER1 + ", " + MATCHES_TEAM1_PLAYER2 + ", " + MATCHES_TEAM2_PLAYER1 + ", " + MATCHES_TEAM2_PLAYER2 + ") REFERENCES " + TABLE_PLAYERS + "(" + PLAYERS_ID + ", " + PLAYERS_ID + ", " + PLAYERS_ID + ", " + PLAYERS_ID + "))";
+	protected static final String SQL_CREATE_TABLE_MATCHES = SQL_CREATE_TABLE + " " + TABLE_MATCHES + " (" + MATCHES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + MATCHES_DATE + " TEXT NOT NULL, " + MATCHES_TIME + " TEXT NOT NULL, " + MATCHES_TEAM1_PLAYER1 + " INTEGER NOT NULL, " + MATCHES_TEAM1_PLAYER2 + " INTEGER NOT NULL, " + MATCHES_TEAM2_PLAYER1 + " INTEGER NOT NULL, " + MATCHES_TEAM2_PLAYER2 + " INTEGER NOT NULL, " + MATCHES_SET_LIMIT + " INTEGER DEFAULT 1001, FOREIGN KEY(" + MATCHES_TEAM1_PLAYER1 + ") REFERENCES " + TABLE_PLAYERS + "(" + PLAYERS_ID + "), FOREIGN KEY(" + MATCHES_TEAM1_PLAYER2 + ") REFERENCES " + TABLE_PLAYERS + "(" + PLAYERS_ID + "), FOREIGN KEY(" + MATCHES_TEAM2_PLAYER1 + ") REFERENCES " + TABLE_PLAYERS + "(" + PLAYERS_ID + "), FOREIGN KEY(" + MATCHES_TEAM2_PLAYER2 + ") REFERENCES " + TABLE_PLAYERS + "(" + PLAYERS_ID + "))";
 	protected static final String SQL_CREATE_TABLE_SETS = SQL_CREATE_TABLE + " " + TABLE_SETS + " (" + SETS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + SETS_MATCH + " INTEGER NOT NULL REFERENCES " + TABLE_MATCHES + "(" + MATCHES_ID + ") ON DELETE CASCADE, " + SETS_WINNING_TEAM + " INTEGER DEFAULT 0, FOREIGN KEY(" + SETS_MATCH + ") REFERENCES " + TABLE_MATCHES + "(" + MATCHES_ID + "))";
 	protected static final String SQL_CREATE_TABLE_GAMES = SQL_CREATE_TABLE + " " + TABLE_GAMES + " (" + GAMES_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + GAMES_SET + " INTEGER NOT NULL REFERENCES " + TABLE_SETS + "(" + SETS_ID + ") ON DELETE CASCADE, " + GAMES_ALL_TRICKS + " BOOLEAN DEFAULT 0, " + GAMES_TEAM1_DECLARATIONS + " INTEGER DEFAULT 0, " + GAMES_TEAM2_DECLARATIONS + " INTEGER DEFAULT 0, " + GAMES_TEAM1_POINTS + " INTEGER DEFAULT 0, " + GAMES_TEAM2_POINTS + " INTEGER DEFAULT 0, FOREIGN KEY(" + GAMES_SET + ") REFERENCES " + TABLE_SETS + "(" + SETS_ID + "))";
 	
@@ -77,10 +82,11 @@ public class Data {
 		activeSet = belaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_ACTIVE_SET);
 	}
 	
-	public Cursor getPlayersCursorEx() {
+	public Cursor getPlayersCursor() {
 		
 		// This query return list of all players sorted ascending by player name. Each row will contain
 		// player id, player name, number of sets won and number of sets played
+		// This query was created by Krunoslav Puljiæ
 		final String query = "SELECT T2." + PLAYERS_ID + " AS " + PLAYERS_ID + ", T2." + PLAYERS_NAME +
 			" AS " + PLAYERS_NAME + ", COALESCE(" + SETS_WON + ",0) AS " + SETS_WON +
 			", " + SETS_COUNT + " FROM (SELECT " + TABLE_PLAYERS + "." + PLAYERS_ID + " AS " +
@@ -110,12 +116,6 @@ public class Data {
 		return belaOpenHandler.getReadableDatabase().rawQuery(query, null); 
 	}
 	
-	public Cursor getPlayersCursor() {
-		
-		String[] playersColumns = new String[] { Data.PLAYERS_ID, Data.PLAYERS_NAME };
-		return belaOpenHandler.getReadableDatabase().query(Data.TABLE_PLAYERS, playersColumns, null, null, null, null, Data.PLAYERS_NAME + " ASC");
-	}
-	
 	public Integer addPlayer(String name) {
 		
 		ContentValues values = new ContentValues();
@@ -123,15 +123,27 @@ public class Data {
 		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_PLAYERS, null, values);
 	}
 	
-	public void removePlayer(Integer id) {
+	public boolean removePlayer(Integer id) {
 		
 		String whereClause = Data.PLAYERS_ID + "=" + id.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, whereClause, null);
+		try {
+			belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, whereClause, null);
+		}
+		catch (SQLiteException e) {
+			return false;
+		}
+		return true;
 	}
 	
-	public void removeAllPlayers() {
+	public boolean removeAllPlayers() {
 		
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, null, null);
+		try {
+			belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, null, null);
+		}
+		catch (SQLiteException e) {
+			return false;
+		}
+		return true;
 	}
 	
 	public Cursor getMatchesCursor(Integer limit) {
@@ -186,7 +198,7 @@ public class Data {
 		values.put(Data.MATCHES_TEAM1_PLAYER2, team1Player2Id);
 		values.put(Data.MATCHES_TEAM2_PLAYER1, team2Player1Id);
 		values.put(Data.MATCHES_TEAM2_PLAYER2, team2Player2Id);
-		values.put(Data.MATCHES_SET_LIMIT, setLimit);
+		values.put(Data.MATCHES_SET_LIMIT, setLimit); 
 		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_MATCHES, null, values);
 	}
 	

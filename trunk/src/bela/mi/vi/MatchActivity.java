@@ -12,7 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * This activity handles 
+ * This activity handles match details.
+ * It uses GameList to manage total score and sets.
  *  
  * @author Damir Mihaljinec
  */

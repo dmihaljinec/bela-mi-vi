@@ -11,6 +11,11 @@ import android.widget.TextView;
 
 import java.text.*;
 
+/**
+ * This activity handles match statistics.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class StatisticsActivity extends Activity {
 
 	private MatchData mMatchData;

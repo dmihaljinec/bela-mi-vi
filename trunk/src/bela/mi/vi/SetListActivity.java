@@ -14,6 +14,11 @@ import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 
+/**
+ * This activity handles list of sets.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class SetListActivity extends Activity {
 	
 	private MatchData mMatchData;

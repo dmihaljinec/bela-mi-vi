@@ -22,6 +22,11 @@ import android.widget.TextView;
 import android.content.DialogInterface;
 import android.text.InputType;
 
+/**
+ * This activity handles list of players.
+ *  
+ * @author Damir Mihaljinec
+ */
 public class PlayerListActivity extends ListActivity {
 
 	private Data mData;
@@ -41,8 +46,7 @@ public class PlayerListActivity extends ListActivity {
 		headerText.setText(getResources().getString(R.string.new_player));
 		getListView().addHeaderView(header);
 		
-		//mPlayers = mData.getPlayersCursor();
-		mPlayers = mData.getPlayersCursorEx();
+		mPlayers = mData.getPlayersCursor();
 		startManagingCursor(mPlayers);
 		String[] from = new String[] { Data.PLAYERS_ID, Data.PLAYERS_NAME };
 		int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
