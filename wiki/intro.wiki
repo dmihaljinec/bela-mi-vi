@@ -9,3 +9,6 @@ Application is designed for 480x800 screen resolution but it can be used on scre
 = Screen shots =
 
 [http://bela-mi-vi.googlecode.com/files/MatchActivity.png]
+[http://bela-mi-vi.googlecode.com/files/MatchListActivity.png]
+[http://bela-mi-vi.googlecode.com/files/NewGameActivity.png]
+[http://bela-mi-vi.googlecode.com/files/StatisticsActivity.png]
