@@ -1,8 +1,8 @@
 = Introduction =
 
-Bela !MiVi is application for storing results in four player Bela (Belot, Belote) card game. It collects and provides interesting statistical data. For each match it possible to see total number of declarations, all tricks, chosen trump rate and passed games rate. For each player it's possible to see sets won rate.
+Bela !MiVi is application for storing results in four player Bela (Belot, Belote) card game. It collects and provides interesting statistical data. For each match it's possible to see total number of declarations, all tricks, chosen trump rate and passed games rate. For each player it's possible to see sets won rate.
 
-Based on phone locale settings, supported languages are English (default), Croatia (applied for Bosnian and Serbian locale) and Hungarian.
+Based on phone locale settings, supported languages are English (default), Croatian (applied for Bosnian and Serbian locale) and Hungarian.
 
 Application is designed for 480x800 screen resolution but it can be used on screens with smaller resolution.
 
