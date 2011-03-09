@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- MatchListActivity -->
+	<string name="match_list_activity_title">Meccs jegyzéke</string>
+	<string name="new_match">Új meccs</string>
+	<string name="list_footer">Többet</string>
+	<!-- Options menu -->
+	<string name="remove_all_matches">Töröld mind</string>
+	<!--  Context menu -->
+	<string name="remove_match">Töröld</string>
+	<!-- Delete match confirmation dialog -->
+	<string name="match_delete_conformation">Meccs törölve</string>
+	<!-- Delete all matches confirmation dialog -->
+	<string name="match_delete_all_conformation">Minden meccs törölve</string>
+	<!-- Not enough players dialog -->
+	<string name="not_enough_players">Új mérkőzés kezdéséhez legalább négy játékos szükséges. Válasszon a menű \'Játékosok jegyzéke\'ből.</string>
+	<!--  Help dialog -->
+	<string name="match_list_activity_help_message">Új meccs bejegyzéséhez nyomja meg \'Új meccs\' billentyűt a képernyő felső részén, vagy válassza \'Új meccs\' a menűből. Az utolsó bejegyzett meccs a jegyzék elején található.\n\nA kiválasztott meccsre kattintva a meccs részleteiről tájákozódhat.\n\nEgy-egy meccs törlése a kiválasztott meccs billentyű hosszabbantartó lenyomásával történik. Az összes meccs törlésére válassza a menűből a \'Töröld mind\' billentyűt.\n\nA játékosok irányítására válassza a menűből a \'Játékosok névsorá\'.</string>
+
+	<!-- PlayerListActivity -->
+	<string name="player_list_activity_title">Játékosok névsora</string>
+	<string name="winning_rate">Nyert játszma</string>
+	<!-- Options menu -->
+	<string name="new_player">Új játékos</string>
+	<string name="remove_all_players">Töröld mind</string>
+	<!-- Context menu -->
+	<string name="remove_player">Töröld</string>
+	<!-- Delete player confirmation dialog -->
+	<string name="player_delete_conformation">Játékos törölve</string>
+	<!-- Delete all players confirmation dialog -->
+	<string name="player_delete_all_conformation">Minden játékos törölve</string>
+	<!-- New player dialog -->
+	<string name="enter_player_name">Játékos neve</string>
+	<!--  Help dialog -->
+	<string name="player_list_activity_help_message">Új játékos bejegyzéséhez nyomja meg \'Új játékos\' billentyűt a képernyő felső részén,vagy válassza \'Új játékos\' a menűből. A játékos neve egyéni! A játékosok névszerinti abc sorrendben következnek. Minden játékosnak kimutatható mennyi részt nyert az összesen lejátszott játszmából.\n\nEgy-egy játékos törlése a névsorból lehetséges a kiválasztott játékos billentyű hosszabbantartó lenyomásával. Az összes játékos törlésére válassza a \'Töröld mind\' billentyűt a menűből.\n\nFIGYELMEZTETÉS\nTörölni kell minden játékost, aki nincs kapcsolatban valamelyik meccsel, ellenkező esetben a meccs elveszíti az adatokat a játékosokról.</string>
+
+	<!-- MatchActivity -->
+	<string name="match_activity_title">Meccs</string>
+	<string name="game_result">Összesítés</string>
+	<string name="difference">Különbözet</string>
+	<!--  Help dialog -->
+	<string name="match_activity_help_message">A képernyő felső részén látható az oldalak jegyzéke és a pillanatnyi erdmények a játszmában.\n\nÚj játék kezdése az \'Új játék\' billentyűvel történik a képernyő felső részén, vagy válassza \'Új játék\' a menűből. A játszmák felsorolása a jegyzékben időrendbeli.\n\nA képernyő alján látható a lejátszott játszmák eredménye és a felek közötti különbség.\n\nA játék törlése a jegyzékből a kiválasztott játék billentyű hosszabbantartó lenyomásával történik.\n\nA pillanatnyi meccs teljes jegyzékéhez válassza a \'Játékok jegyzéke\' a menűből.\n\nA kimutatás áttekintésére a pillanatnyi meccs közben, válassza a menű \'Meccs-statisztika\' billentyűjét.</string>
+
+	<!-- Global -->
+	<string name="app_name">BelaMiVi</string>
+	<string name="team1">Mi</string>
+	<string name="team2">Ők</string>
+	<string name="ok">Rendben</string>
+	<string name="cancel">Add fel</string>
+	<string name="yes">Igen</string>
+	<string name="no">Nem</string>
+	<string name="help">Segítség</string>
+	<string name="warning">Figyelmeztetés</string>
+	<string name="close">Kilépes</string>
+
+	<!-- GameActivity -->
+	<string name="game_activity_title">Játékok jegyzéke</string>
+	<!--  Help dialog -->
+	<string name="game_activity_help_message">A játékok jegyzéke, a pillanatnyi játszmában, időrendi sorendben. A kiválasztott játék billentyű hosszabbantartó lenyomásával törölhető kizárólag, ha a pillanatnyi jegyzék a mérkőzés utolsó játszmájára vonatkozik.</string>
+
+	<!-- GameList -->
+	<string name="new_game">Új játék</string>
+	<!-- Delete game confirmation dialog -->
+	<string name="remove_game">Töröld</string>
+	<string name="game_delete_conformation">A játék törölve</string>
+
+	<!-- SetListActivity -->
+	<string name="set_list_activity_title">Játszmák jegyzéke</string>
+	<!--  Help dialog -->
+	<string name="set_list_activity_help_message">A játszmák jegyzéke a pillanatnyi meccsben, időrendi sorrendben. Válassza a kívánt játszma billentyűt az adott játszma játékjegyzéke kimutatásához.</string>
+
+	<!-- NewMatchActivity -->
+	<string name="new_match_activity_title">Új meccs</string>
+	<string name="creation_date">Keltezés időpontja</string>
+	<string name="team1_players">Mi játékosok</string>
+	<string name="team2_players">Ők játékosok</string>
+	<string name="set_limit">A játszmák tartama</string>
+	<string name="players">Játékosok</string>
+	<!--  Help dialog -->
+	<string name="new_match_activity_help_message">Válogasson játékosokat a Mi illetve az Ők csapatnak. A meccs követelménye, hogy minden játékos egyedi!\n\nA játék tartamát \'A játszmák tartama\' billentyűvel határozzuk meg.</string>
+
+	<!-- NewGameActivity -->
+	<string name="new_game_activity_title">Új játék</string>
+	<string name="game_points">Játékpontok</string>
+	<string name="declaration_team">A csapat amely hívott</string>
+	<string name="declarations">Hívás</string>
+	<string name="points">Pontok</string>
+	<string name="all_tricks">Összes fogás</string>
+	<string name="bela">Bella</string>
+	<!--  Help dialog -->
+	<string name="new_game_activity_help_message">Amennyiben 162 pontnál több van a játékban, azt jelenti, hogy valaki hívott, vagy minden ütést fogott.\n\nHatározzák meg melyik csapat hívott a Mi vagy az Ők billentyűt lenyomva. A +20 és +50 billentyűkkel növeljék a hívó csapat pontszámát. Amennyiben a másik csapat hívott ˝Bellát˝, nyomja meg a \'Bella\' billentyűt. A hívó csapat változtatása visszaallitja a pontok kezdő értékét.\n\nHa minden fogás egyik félhez került nyomja meg a \'Összes fogás\' billentyűt.\n\nCsak az egyik csapat pontjait tápláljuk be, a másik félnek automatikusan számolja el a pontokat a játék tartamátol függően. A hívásokat külön kell hozzáadni!</string>
+
+	<!-- StatisticsActivity -->
+	<string name="statistics_activity_title">Meccs statisztika</string>
+	<string name="chosen_trump">Kiválasztott adu</string>
+	<string name="winnings">Nyeremény</string>
+	<string name="sets">Játszmák</string>
+	<!--  Help dialog -->
+	<string name="statistics_activity_help_message">Választott adu.\nJátékok számának aránya az összeshez viszonyítva, amikor a meghatarozott csapat valasztotta az adut.\n\nNyeremény\nA meghatarozott csapat megnyert játékok számának aránya az adut hívó játékokhoz viszonyítva.</string>
+</resources>
