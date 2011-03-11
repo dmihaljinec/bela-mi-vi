@@ -33,7 +33,9 @@ public class MatchListActivity extends ListActivity{
 	private Cursor mMatches;
 	private Integer mRemoveMatchId;
 	private static final Integer mHeader = 1;
-	private static final Integer LIST_ITEM_LIMIT = 20;
+	private static final Integer LIST_ITEM_LIMIT = 10;
+	private Integer mTotalMatchCount;
+	private View mFooter;
 	
 	public void onAttachedToWindow() {
 	
@@ -55,28 +57,24 @@ public class MatchListActivity extends ListActivity{
 		headerText.setText(getResources().getString(R.string.new_match));
 		getListView().addHeaderView(header);
 		
+		// Add footer
+		mFooter = (View)getLayoutInflater().inflate(R.layout.match_list_row, null);
+		TextView footerText = (TextView) mFooter.findViewById(R.id.score);
+		footerText.setText(getResources().getString(R.string.list_footer));
+		getListView().addFooterView(mFooter);
+		
 		// Add cursor adapter
-		mMatches = mData.getMatchesCursor(LIST_ITEM_LIMIT);
-		startManagingCursor(mMatches);
-		String[] from = new String[] { Data.MATCHES_DATE, Data.MATCHES_TIME, Data.TEAM1_SETS, Data.TEAM2_SETS,
-									   Data.TEAM1_PLAYER1, Data.TEAM1_PLAYER2, Data.TEAM2_PLAYER1, Data.TEAM2_PLAYER2 };
-		int[] to = new int[] { R.id.date, R.id.time, R.id.score, R.id.players };
-		
-		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.match_list_row, mMatches, from, to);
-		adapter.setViewBinder(new MatchListViewBinder());
-		setListAdapter(adapter);
+		addCursorAdapter(LIST_ITEM_LIMIT);
 		registerForContextMenu(getListView());
+	}
+	
+	@Override
+	public void onResume() {
 		
-		/*
-		if (mMatches.getCount() == LIST_ITEM_LIMIT) {
-			// Add footer
-			View footer = (View)getLayoutInflater().inflate(R.layout.match_list_row, null);
-			footer.getHeight();
-			TextView footerText = (TextView) footer.findViewById(R.id.score);
-			footerText.setText(getResources().getString(R.string.list_footer));
-			getListView().addFooterView(footer);
-		}
-		*/
+		super.onResume();
+		mMatches.requery();
+		mTotalMatchCount = mData.getMatchesCursor(null).getCount();
+		showFooter();
 	}
 	
 	@Override
@@ -87,6 +85,13 @@ public class MatchListActivity extends ListActivity{
 		// Header
 		if (position == 0) {
 			newMatch();
+			return;
+		}
+		
+		// Footer
+		if (position > mMatches.getCount()) {
+			addCursorAdapter(mMatches.getCount() + LIST_ITEM_LIMIT);
+			showFooter();
 			return;
 		}
 		
@@ -173,6 +178,8 @@ public class MatchListActivity extends ListActivity{
 			public void onClick(DialogInterface dialog, int whichButton) {
 				mData.removeAllMatches();
 				mMatches.requery();
+				mTotalMatchCount = 0;
+				showFooter();
 			}
 		});
 		builder.setNegativeButton(this.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -194,6 +201,8 @@ public class MatchListActivity extends ListActivity{
 			public void onClick(DialogInterface dialog, int whichButton) {
 				mData.removeMatch(mRemoveMatchId);
 				mMatches.requery();
+				mTotalMatchCount--;
+				showFooter();
 			}
 		});
 		builder.setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -255,6 +264,31 @@ public class MatchListActivity extends ListActivity{
 			default:
 				return false;
 			}
+		}
+	}
+	
+	public void addCursorAdapter(Integer limit) {
+		
+		mMatches = mData.getMatchesCursor(limit);
+		startManagingCursor(mMatches);
+		String[] from = new String[] { Data.MATCHES_DATE, Data.MATCHES_TIME, Data.TEAM1_SETS, Data.TEAM2_SETS,
+									   Data.TEAM1_PLAYER1, Data.TEAM1_PLAYER2, Data.TEAM2_PLAYER1, Data.TEAM2_PLAYER2 };
+		int[] to = new int[] { R.id.date, R.id.time, R.id.score, R.id.players };
+		
+		SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.match_list_row, mMatches, from, to);
+		adapter.setViewBinder(new MatchListViewBinder());
+		setListAdapter(adapter);
+	}
+	
+	private void showFooter() {
+	
+		if (mMatches.getCount() < mTotalMatchCount) {
+			if (getListView().getFooterViewsCount() == 0)
+				getListView().addFooterView(mFooter);
+		}
+		else {
+			if (getListView().getFooterViewsCount() > 0)
+				getListView().removeFooterView(mFooter);
 		}
 	}
 }

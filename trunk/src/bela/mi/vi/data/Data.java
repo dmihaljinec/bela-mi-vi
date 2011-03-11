@@ -171,8 +171,12 @@ public class Data {
 			Data.PLAYERS_ID + "=" + Data.TABLE_MATCHES + "." + Data.MATCHES_TEAM2_PLAYER2 +
 			") AS " + Data.TEAM2_PLAYER2 +
 			" FROM " + Data.TABLE_MATCHES + " ORDER BY " + Data.MATCHES_DATE + " DESC, " +
-			Data.MATCHES_TIME + " DESC LIMIT " + limit.toString();
-		return belaOpenHandler.getReadableDatabase().rawQuery(query, null);
+			Data.MATCHES_TIME + " DESC";
+		
+		if (limit != null)
+			return belaOpenHandler.getReadableDatabase().rawQuery(query + " LIMIT " + limit.toString(), null);
+		else
+			return belaOpenHandler.getReadableDatabase().rawQuery(query, null);
 	}
 	
 	public Integer getMatchLimit(Integer matchId) {
