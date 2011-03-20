@@ -83,7 +83,7 @@
 	<!-- NewGameActivity -->
 	<string name="new_game_activity_title">Nouveau Jeu</string>
 	<string name="game_points">Points dans le jeu</string>
-	<string name="declaration_team">L'équipe qui avait annonces</string>
+	<string name="declaration_team">L\'équipe qui avait annonces</string>
 	<string name="declarations">Les annonces</string>
 	<string name="points">Points</string>
 	<string name="all_tricks">Capot</string>
@@ -93,7 +93,7 @@
 
 	<!-- StatisticsActivity -->
 	<string name="statistics_activity_title">Statistiques du Match</string>
-	<string name="chosen_trump">Le choix de l'atout</string>
+	<string name="chosen_trump">Le choix de l\'atout</string>
 	<string name="winnings">Passed Games</string>
 	<string name="sets">Partie</string>
 	<!--  Help dialog -->
