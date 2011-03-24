@@ -129,6 +129,10 @@ public class MatchListActivity extends ListActivity{
 	    	HelpDialog help = new HelpDialog(this, getResources().getString(R.string.match_list_activity_help_message));
 	    	help.show();
 	    	return true;
+	    case R.id.settings:
+	    	Intent settingsIntent = new Intent(MatchListActivity.this, SettingsActivity.class);
+	    	startActivity(settingsIntent);
+	    	return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
