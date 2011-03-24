@@ -98,4 +98,7 @@
 	<string name="sets">Partije</string>
 	<!--  Help dialog -->
 	<string name="statistics_activity_help_message">Odabran adut\nOmjer broja igara kada je određena strana odabrala adut sa ukupnim brojem igara.\n\nProlaznost\nOmjer broja igara gdje je određena strana prošla sa brojem igara gdje je odabrala adut.</string>
+	
+	<!-- SettingsActivity -->
+	<string name="settings_activity_title">Postavke</string>
 </resources>

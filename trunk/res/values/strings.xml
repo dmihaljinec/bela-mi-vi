@@ -98,4 +98,7 @@
 	<string name="sets">Sets</string>
 	<!--  Help dialog -->
 	<string name="statistics_activity_help_message">Chosen Trump\nIt\'s a rate between total number of games and number of games in which certain side chose trump.\n\nPassed Games\nIt\'s a rate between number of times that certain trump was chosen and games in which sufficient number of points was obtained.</string>
+	
+	<!-- SettingsActivity -->
+	<string name="settings_activity_title">Settings</string>
 </resources>

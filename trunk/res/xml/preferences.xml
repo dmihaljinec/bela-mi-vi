@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	>
+	<PreferenceCategory
+		android:title="@string/points"
+		>
+		<EditTextPreference
+			android:summary="This allows you to enter a string"
+			android:defaultValue="162"
+			android:title="@string/game_points"
+			android:key="gamePointsPref"
+			android:inputType="phone"
+			/>
+		<EditTextPreference
+			android:summary="This allows you to enter a string"
+			android:defaultValue="90"
+			android:title="@string/all_tricks"
+			android:key="allTricksPref"
+			android:inputType="number"
+			/>
+		<EditTextPreference
+			android:summary="This allows you to enter a string"
+			android:defaultValue="20"
+			android:title="@string/bela"
+			android:key="belaPref"
+			android:inputType="number"
+			/>
+		<EditTextPreference
+			android:summary="This allows you to enter a string"
+			android:defaultValue="1001"
+			android:title="@string/set_limit"
+			android:key="setLimitPref"
+			android:inputType="number"
+			/>
+	</PreferenceCategory>
+</PreferenceScreen>

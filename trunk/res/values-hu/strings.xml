@@ -98,4 +98,7 @@
 	<string name="sets">Játszmák</string>
 	<!--  Help dialog -->
 	<string name="statistics_activity_help_message">Választott adu.\nJátékok számának aránya az összeshez viszonyítva, amikor a meghatarozott csapat valasztotta az adut.\n\nNyeremény\nA meghatarozott csapat megnyert játékok számának aránya az adut hívó játékokhoz viszonyítva.</string>
+	
+	<!-- SettingsActivity -->
+	<string name="settings_activity_title">Beállítások</string>
 </resources>
