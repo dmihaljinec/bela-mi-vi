@@ -1,14 +1,17 @@
 package bela.mi.vi;
 
 import bela.mi.vi.data.Data;
+import bela.mi.vi.data.MatchData;
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.AdapterView;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -67,6 +70,8 @@ public class NewMatchActivity extends Activity implements OnClickListener {
 			mPlayersSpinner[i].setOnItemSelectedListener(playerListener);
 		}
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		
 		SimpleDateFormat sdf = new SimpleDateFormat (DATE_FORMAT);
 		String date = sdf.format(Calendar.getInstance().getTime());
 		mDate = date.substring(0, 10);
@@ -76,7 +81,7 @@ public class NewMatchActivity extends Activity implements OnClickListener {
 		textView = (TextView) findViewById(R.id.time);
 		textView.setText(mTime);
 		EditText limit = (EditText) findViewById(R.id.limit);
-		limit.setText(Integer.toString(Data.SET_LIMIT));
+		limit.setText(prefs.getString("setLimitPref", Integer.toString(Data.SET_LIMIT)));
 		limit.addTextChangedListener(new LimitTextWatcher());
 		mOkButton = (Button) findViewById(R.id.ok);
 		mOkButton.setOnClickListener(this);

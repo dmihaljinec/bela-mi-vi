@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.RadioButton;
 import android.text.TextWatcher;
 import android.text.Editable;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 /**
  * This activity handles game details.
@@ -27,7 +29,10 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	private MatchData mMatchData;
 	private Integer mTeam1Declarations = 0;
 	private Integer mTeam2Declarations = 0;
-	private Integer mGamePoints = MatchData.GAME_POINTS;
+	private Integer mGamePoints;
+	private Integer mDefaultGamePoints;
+	private Integer mDefaultAllTricks;
+	private Integer mDefaultBelaDeclarations;
 	private Integer mDeclarationTeam = 0;
 	
 	// Widgets
@@ -61,7 +66,13 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mMatchId = extras.getInt(MATCH_ID);
 		mMatchData = new MatchData(this, mMatchId);
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		mDefaultGamePoints = Integer.valueOf(prefs.getString("gamePointsPref", Integer.toString(MatchData.GAME_POINTS)));
+		mDefaultAllTricks = Integer.valueOf(prefs.getString("allTricksPref", Integer.toString(MatchData.ALL_TRICKS)));
+		mDefaultBelaDeclarations = Integer.valueOf(prefs.getString("belaPref", Integer.toString(MatchData.BELA_DECLARATION)));
+		
 		mGamePointsTextView = (TextView) findViewById(R.id.game_points);
+		mGamePointsTextView.setText(prefs.getString("gamePointsPref", Integer.toString(MatchData.GAME_POINTS)));
 		mGamePointsTeam1TextView = (TextView) findViewById(R.id.game_points_team1);
 		mGamePointsTeam2TextView = (TextView) findViewById(R.id.game_points_team2);
 		mGamePointsAllTricksTextView = (TextView) findViewById(R.id.game_points_all_tricks);
@@ -265,10 +276,10 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		
 		if (mBelaCheckBox.isChecked() == true) {
 			if (mDeclarationTeam == MatchData.TEAM1) {
-				mTeam2Declarations = MatchData.BELA_DECLARATION;
+				mTeam2Declarations = mDefaultBelaDeclarations;
 			}
 			else if (mDeclarationTeam == MatchData.TEAM2) {
-				mTeam1Declarations = MatchData.BELA_DECLARATION;
+				mTeam1Declarations = mDefaultBelaDeclarations;
 			}
 		}
 		else {
@@ -292,7 +303,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		
 		mTeam1Declarations = 0;
 		mTeam2Declarations = 0;
-		mGamePoints = MatchData.GAME_POINTS;
+		mGamePoints = mDefaultGamePoints;
 		setGamePoints();
 	}
 	
@@ -303,9 +314,9 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	
 	private void setGamePoints() {
 
-		mGamePoints = MatchData.GAME_POINTS + mTeam1Declarations + mTeam2Declarations;
+		mGamePoints = mDefaultGamePoints + mTeam1Declarations + mTeam2Declarations;
 		if (mAllTricksCheckBox.isChecked() == true)
-			mGamePoints += MatchData.ALL_TRICKS;
+			mGamePoints += mDefaultAllTricks;
 		mGamePointsTextView.setText(mGamePoints.toString());
 		mGamePointsTeam1TextView.setText(getResources().getString(R.string.team1) + ": " + mTeam1Declarations.toString());
 		mGamePointsTeam2TextView.setText(getResources().getString(R.string.team2) + ": " + mTeam2Declarations.toString());
