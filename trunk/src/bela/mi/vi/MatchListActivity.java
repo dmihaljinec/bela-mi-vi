@@ -68,6 +68,8 @@ public class MatchListActivity extends ListActivity{
 		
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		mListItemLimit = Integer.valueOf(prefs.getString("matchesListPref", LIST_ITEM_LIMIT.toString()));
+		if (mListItemLimit < 1)
+			mListItemLimit = LIST_ITEM_LIMIT;
 		
 		// Add cursor adapter
 		addCursorAdapter(mListItemLimit);
@@ -80,6 +82,8 @@ public class MatchListActivity extends ListActivity{
 		super.onResume();
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		Integer listItemLimit = Integer.valueOf(prefs.getString("matchesListPref", LIST_ITEM_LIMIT.toString()));
+		if (listItemLimit < 1)
+			listItemLimit = LIST_ITEM_LIMIT;
 		if (mListItemLimit != listItemLimit){
 			mListItemLimit = listItemLimit;
 			addCursorAdapter(mListItemLimit);

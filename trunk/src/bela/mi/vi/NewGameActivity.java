@@ -347,10 +347,6 @@ public class NewGameActivity extends Activity implements OnClickListener {
 					mOkButton.setEnabled(true);
 				}
 			}
-			if (mEqualPoints == false && team1Points == team2Points ){
-				mOkButton.setEnabled(false);
-				return;
-			}
 		}
 	}
 	
@@ -383,13 +379,5 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mAdd20.setEnabled(enable);
 		mAdd50.setEnabled(enable);
 		mBelaCheckBox.setEnabled(enable);
-	}
-	
-	public void setTeamPoints() {
-		
-		if (mPointsTeam1EditText.hasWindowFocus())
-			mTeamSetPoints = MatchData.TEAM2;
-		else if (mPointsTeam2EditText.hasWindowFocus())
-			mTeamSetPoints = MatchData.TEAM1;
 	}
 }
