@@ -27,4 +27,9 @@
 		android:title="@string/settings_activity_title"
 		android:icon="@drawable/ic_menu_preferences"
 		/>
+	<item
+		android:id="@+id/about"
+		android:title="@string/about"
+		android:icon="@drawable/ic_menu_info_details"
+		/>
 </menu>
