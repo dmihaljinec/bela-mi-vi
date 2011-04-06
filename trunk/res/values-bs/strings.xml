@@ -101,4 +101,12 @@
 	
 	<!-- SettingsActivity -->
 	<string name="settings_activity_title">Postavke</string>
+	<string name="equal_points">Jednak broj bodova</string>
+	<string name="equal_points_summary">Dozvoli da obje strane imaju jednak broj bodova u igri</string>
+	<string name="misc">Razno</string>
+	<string name="matches_in_list">Broj mečeva u listi</string>
+	
+	<!-- AboutDialog -->
+	<string name="about">O BelaMiVi</string>
+	<string name="version">Verzija</string>
 </resources>
