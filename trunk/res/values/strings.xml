@@ -101,4 +101,14 @@
 	
 	<!-- SettingsActivity -->
 	<string name="settings_activity_title">Settings</string>
+	<string name="equal_points">Equal amount of points</string>
+	<string name="equal_points_summary">Allow both sides to have equal amount of points in a game</string>
+	<string name="misc">Miscellaneous</string>
+	<string name="matches_in_list">Number of matches in the list</string>
+	
+	<!-- AboutDialog -->
+	<string name="about">About</string>
+	<string name="version">Version</string>
+	<string name="author">© 2011 Damir Mihaljinec</string>
+	<string name="web">http://code.google.com/p/bela-mi-vi/</string>
 </resources>
