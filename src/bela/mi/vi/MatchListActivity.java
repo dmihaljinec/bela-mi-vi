@@ -5,8 +5,10 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,6 +36,7 @@ public class MatchListActivity extends ListActivity{
 	private Integer mRemoveMatchId;
 	private static final Integer mHeader = 1;
 	private static final Integer LIST_ITEM_LIMIT = 10;
+	private Integer mListItemLimit;
 	private Integer mTotalMatchCount;
 	private View mFooter;
 	
@@ -63,8 +66,11 @@ public class MatchListActivity extends ListActivity{
 		footerText.setText(getResources().getString(R.string.list_footer));
 		getListView().addFooterView(mFooter);
 		
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		mListItemLimit = Integer.valueOf(prefs.getString("matchesListPref", LIST_ITEM_LIMIT.toString()));
+		
 		// Add cursor adapter
-		addCursorAdapter(LIST_ITEM_LIMIT);
+		addCursorAdapter(mListItemLimit);
 		registerForContextMenu(getListView());
 	}
 	
@@ -72,6 +78,12 @@ public class MatchListActivity extends ListActivity{
 	public void onResume() {
 		
 		super.onResume();
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		Integer listItemLimit = Integer.valueOf(prefs.getString("matchesListPref", LIST_ITEM_LIMIT.toString()));
+		if (mListItemLimit != listItemLimit){
+			mListItemLimit = listItemLimit;
+			addCursorAdapter(mListItemLimit);
+		}
 		mMatches.requery();
 		mTotalMatchCount = mData.getMatchesCursor(null).getCount();
 		showFooter();
@@ -90,7 +102,7 @@ public class MatchListActivity extends ListActivity{
 		
 		// Footer
 		if (position > mMatches.getCount()) {
-			addCursorAdapter(mMatches.getCount() + LIST_ITEM_LIMIT);
+			addCursorAdapter(mMatches.getCount() + mListItemLimit);
 			showFooter();
 			return;
 		}
@@ -132,6 +144,10 @@ public class MatchListActivity extends ListActivity{
 	    case R.id.settings:
 	    	Intent settingsIntent = new Intent(MatchListActivity.this, SettingsActivity.class);
 	    	startActivity(settingsIntent);
+	    	return true;
+	    case R.id.about:
+	    	AboutDialog about = new AboutDialog(this);
+	    	about.show();
 	    	return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
