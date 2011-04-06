@@ -101,4 +101,12 @@
 	
 	<!-- SettingsActivity -->
 	<string name="settings_activity_title">Beállítások</string>
+	<string name="equal_points">Egyenlő mennyiségű pontot</string>
+	<string name="equal_points_summary">Engedd meg, hogy mindkét félnek azonos pontszáma legyen</string>
+	<string name="misc">Vegyes</string>
+	<string name="matches_in_list">Meccsek száma a listán</string>
+	
+	<!-- AboutDialog -->
+	<string name="about">Rólunk</string>
+	<string name="version">Verzió</string>
 </resources>
