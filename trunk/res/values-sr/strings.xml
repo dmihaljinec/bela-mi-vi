@@ -107,6 +107,6 @@
 	<string name="matches_in_list">Broj mečeva u listi</string>
 	
 	<!-- AboutDialog -->
-	<string name="about">O BelaMiVi</string>
+	<string name="about">O programu</string>
 	<string name="version">Verzija</string>
 </resources>

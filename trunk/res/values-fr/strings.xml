@@ -101,4 +101,12 @@
 	
 	<!-- SettingsActivity -->
 	<string name="settings_activity_title">Paramètres</string>
+	<string name="equal_points">Montant égal de points</string>
+	<string name="equal_points_summary">Allow both sides to have equal amount of points in a game</string>
+	<string name="misc">Divers</string>
+	<string name="matches_in_list">Nombre de matches dans la liste</string>
+	
+	<!-- AboutDialog -->
+	<string name="about">A propos</string>
+	<string name="version">Version</string>
 </resources>
