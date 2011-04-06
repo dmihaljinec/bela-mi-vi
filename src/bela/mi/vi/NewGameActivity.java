@@ -34,6 +34,8 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	private Integer mDefaultAllTricks;
 	private Integer mDefaultBelaDeclarations;
 	private Integer mDeclarationTeam = 0;
+	private Boolean mEqualPoints;
+	private Integer mTeamSetPoints = 0;
 	
 	// Widgets
 	private TextView mGamePointsTextView;
@@ -70,6 +72,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mDefaultGamePoints = Integer.valueOf(prefs.getString("gamePointsPref", Integer.toString(MatchData.GAME_POINTS)));
 		mDefaultAllTricks = Integer.valueOf(prefs.getString("allTricksPref", Integer.toString(MatchData.ALL_TRICKS)));
 		mDefaultBelaDeclarations = Integer.valueOf(prefs.getString("belaPref", Integer.toString(MatchData.BELA_DECLARATION)));
+		mEqualPoints = prefs.getBoolean("equalPointsPref", false);
 		
 		mGamePointsTextView = (TextView) findViewById(R.id.game_points);
 		mGamePointsTextView.setText(prefs.getString("gamePointsPref", Integer.toString(MatchData.GAME_POINTS)));
@@ -129,7 +132,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			else
 				mGamePointsAllTricksTextView.setTextColor(getResources().getColor(R.color.grey));
 			setGamePoints();
-			resetPoints();
+			resetPoints(true);
 		}
 	}
 
@@ -139,7 +142,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			
 			addBela();
 			setGamePoints();
-			resetPoints();
+			resetPoints(false);
 		}
 	}
 	
@@ -156,7 +159,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			
 			addDeclarations(mAdd);
 			setGamePoints();
-			resetPoints();
+			resetPoints(false);
 		}
 	}
 	
@@ -179,7 +182,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 				setBelaCheckBoxLabel(mTeam);
 				resetDeclarations();
 				resetGamePoints();
-				resetPoints();
+				resetPoints(false);
 			}
 		}
 	}
@@ -195,6 +198,11 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		
 		public void afterTextChanged(Editable primary) {
 			
+			mTeamSetPoints = 0;
+			if (mPointsTeam1EditText.hasFocus())
+				mTeamSetPoints = MatchData.TEAM2;
+			else if (mPointsTeam2EditText.hasFocus())
+				mTeamSetPoints = MatchData.TEAM1;
 			
 			Integer primaryNumber = 0;
 			Integer secondaryNumber = 0;
@@ -202,6 +210,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 				mOkButton.setEnabled(false);
 				return;
 			}
+			
 			primaryNumber = Integer.parseInt(primary.toString());
 			if (mSecondary.getText().toString().contentEquals("") == true) {
 				if (primaryNumber == mGamePoints) {
@@ -212,6 +221,10 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			}
 			else {
 				secondaryNumber = Integer.parseInt(mSecondary.getText().toString());
+				if (mEqualPoints == false && primaryNumber == secondaryNumber ){
+					mOkButton.setEnabled(false);
+					return;
+				}
 				if (primaryNumber + secondaryNumber == mGamePoints) {
 					mOkButton.setEnabled(true);
 					return;
@@ -225,6 +238,10 @@ public class NewGameActivity extends Activity implements OnClickListener {
 				return;
 			}
 			secondaryNumber = mGamePoints - primaryNumber;
+			if (mEqualPoints == false && primaryNumber == secondaryNumber ){
+				mOkButton.setEnabled(false);
+				return;
+			}
 			if (mAllTricksCheckBox.isChecked() == true && ((primaryNumber > 0) && (primaryNumber < mGamePoints))) {
 				mOkButton.setEnabled(false);
 			}
@@ -292,11 +309,49 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		}
 	}
 	
-	private void resetPoints() {
+	private void resetPoints(Boolean force) {
 		
-		mPointsTeam1EditText.setText("");
-		mPointsTeam2EditText.setText("");
-		mOkButton.setEnabled(false);
+		if (force == true){
+			mTeamSetPoints = 0;
+			mPointsTeam1EditText.setText("");
+			mPointsTeam2EditText.setText("");
+			mOkButton.setEnabled(false);
+		}
+		else{
+			if (mPointsTeam1EditText.getText().toString().contentEquals("") == true ||
+				mPointsTeam2EditText.getText().toString().contentEquals("") == true)
+				return;
+			
+			Integer team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
+			Integer team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
+			
+			if (mTeamSetPoints == MatchData.TEAM1){
+				team1Points = mGamePoints - team2Points;
+				if (mEqualPoints == false && team1Points == team2Points){
+					mPointsTeam1EditText.setText("");
+					mOkButton.setEnabled(false);
+				}
+				else{
+					mPointsTeam1EditText.setText(Integer.toString(team1Points));
+					mOkButton.setEnabled(true);
+				}
+			}
+			else if (mTeamSetPoints == MatchData.TEAM2){
+				team2Points = mGamePoints - team1Points;
+				if (mEqualPoints == false && team1Points == team2Points){
+					mPointsTeam2EditText.setText("");
+					mOkButton.setEnabled(false);
+				}
+				else{
+					mPointsTeam2EditText.setText(Integer.toString(team2Points));
+					mOkButton.setEnabled(true);
+				}
+			}
+			if (mEqualPoints == false && team1Points == team2Points ){
+				mOkButton.setEnabled(false);
+				return;
+			}
+		}
 	}
 	
 	private void resetGamePoints() {
@@ -328,5 +383,13 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mAdd20.setEnabled(enable);
 		mAdd50.setEnabled(enable);
 		mBelaCheckBox.setEnabled(enable);
+	}
+	
+	public void setTeamPoints() {
+		
+		if (mPointsTeam1EditText.hasWindowFocus())
+			mTeamSetPoints = MatchData.TEAM2;
+		else if (mPointsTeam2EditText.hasWindowFocus())
+			mTeamSetPoints = MatchData.TEAM1;
 	}
 }
