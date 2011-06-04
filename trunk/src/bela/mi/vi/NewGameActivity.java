@@ -318,12 +318,14 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			mOkButton.setEnabled(false);
 		}
 		else{
-			if (mPointsTeam1EditText.getText().toString().contentEquals("") == true ||
-				mPointsTeam2EditText.getText().toString().contentEquals("") == true)
-				return;
+			Integer team1Points = 0;
+			Integer team2Points = 0;
 			
-			Integer team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
-			Integer team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
+			if (mPointsTeam1EditText.getText().toString().contentEquals("") == false)
+				team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
+			
+			if (mPointsTeam2EditText.getText().toString().contentEquals("") == false)
+				team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
 			
 			if (mTeamSetPoints == MatchData.TEAM1){
 				team1Points = mGamePoints - team2Points;
