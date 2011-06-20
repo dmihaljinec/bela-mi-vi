@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.AdapterView;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.view.Menu;
@@ -43,6 +44,8 @@ public class NewMatchActivity extends Activity implements OnClickListener {
 	private Spinner mPlayersSpinner[];
 	
 	private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
+	
+	public static final String MATCH_ID = "match_id";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -112,15 +115,15 @@ public class NewMatchActivity extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		
 		if (view == mOkButton) {
-			if (addMatch() == true) {
-				setResult(Activity.RESULT_OK);
-        		finish();
-			}
+			int matchId = addMatch();
+			Intent extras = new Intent();
+			extras.putExtra(MATCH_ID, matchId);
+			setResult(Activity.RESULT_OK, extras);
 		}
 		else if (view == mCancelButton) {
 			setResult(Activity.RESULT_CANCELED);
-			finish();
 		}
+		finish();
 	}
 	
 	private void enableOkButton() {
@@ -169,7 +172,7 @@ public class NewMatchActivity extends Activity implements OnClickListener {
         public void onTextChanged(CharSequence s, int start, int before, int count) { }
 	}
 	
-	private boolean addMatch() {
+	private int addMatch() {
 		
 		Integer[] spinners = new Integer[] { R.id.team1_player1, R.id.team1_player2,
 											 R.id.team2_player1, R.id.team2_player2 };
@@ -186,7 +189,6 @@ public class NewMatchActivity extends Activity implements OnClickListener {
     	if (limit.getText().toString().equals("") == false) {
     		setLimit = Integer.valueOf(limit.getText().toString());
     	}
-        mData.addMatch(mDate, mTime, ids[0], ids[1], ids[2], ids[3], setLimit);
-        return true;
+        return mData.addMatch(mDate, mTime, ids[0], ids[1], ids[2], ids[3], setLimit);
 	}
 }
