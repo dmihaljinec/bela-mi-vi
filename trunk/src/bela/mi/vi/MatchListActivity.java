@@ -39,6 +39,7 @@ public class MatchListActivity extends ListActivity{
 	private Integer mListItemLimit;
 	private Integer mTotalMatchCount;
 	private View mFooter;
+	private static final int NEW_MATCH = 1;
 	
 	public void onAttachedToWindow() {
 	
@@ -193,6 +194,25 @@ public class MatchListActivity extends ListActivity{
 		}
 	}
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch(requestCode){
+		case NEW_MATCH:
+			if (resultCode == RESULT_OK) {
+				Bundle extras = data.getExtras();
+				if (extras == null)
+					return;
+				int matchId = extras.getInt(NewMatchActivity.MATCH_ID);
+				Intent matchIntent = new Intent(MatchListActivity.this, MatchActivity.class);
+				matchIntent.putExtra(MatchActivity.MATCH_ID, matchId);
+		    	startActivity(matchIntent);
+			}
+			break;
+		default:		
+		}
+	}
+	
 	public void confirmDeleteAllDialog() {
 		
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -259,7 +279,7 @@ public class MatchListActivity extends ListActivity{
 		}
 		else {
 			Intent newMatchIntent = new Intent(MatchListActivity.this, NewMatchActivity.class);
-	    	startActivity(newMatchIntent);
+			startActivityForResult(newMatchIntent, NEW_MATCH);
 		}
 	}
 	
