@@ -54,6 +54,14 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	private Button mCancelButton;
 	
 	public static final String MATCH_ID = "match_id";
+	private static final String TEAM1_DECLARATIONS = "Team1Declarations";
+	private static final String TEAM2_DECLARATIONS = "Team2Declarations";
+	private static final String TEAM1_RADIO = "Team1RadioButton";
+	private static final String TEAM2_RADIO = "Team2RadioButton";
+	private static final String BELA_CHECK = "BelaCheckBox";
+	private static final String ALL_TRICKS_CHECK = "AllTricksCheckBox";
+	private static final String TEAM1_POINTS = "Team1Points";
+	private static final String TEAM2_POINTS = "Team2Points";
 	
 	
 	@Override
@@ -100,6 +108,63 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mCancelButton = (Button) findViewById(R.id.cancel);
 		mCancelButton.setOnClickListener(this);
 		setGamePoints();
+	}
+	
+	@Override
+	protected void onSaveInstanceState (Bundle outState) {
+		super.onSaveInstanceState(outState); 
+		outState.putInt(TEAM1_DECLARATIONS, mTeam1Declarations);
+		outState.putInt(TEAM2_DECLARATIONS, mTeam2Declarations);
+		if (mTeam1RadioButton.isChecked()) {
+			outState.putBoolean(TEAM1_RADIO, true);
+		}
+		else if (mTeam2RadioButton.isChecked()) {
+			outState.putBoolean(TEAM2_RADIO, true);
+		}
+		if (mBelaCheckBox.isChecked()) {
+			outState.putBoolean(BELA_CHECK, true);
+		}
+		if (mAllTricksCheckBox.isChecked()) {
+			outState.putBoolean(ALL_TRICKS_CHECK, true);
+		}
+		if (mPointsTeam1EditText.getText().toString().equals("") == false) {
+			outState.putInt(TEAM1_POINTS, Integer.parseInt(mPointsTeam1EditText.getText().toString()));
+		}
+		else if (mPointsTeam2EditText.getText().toString().equals("") == false) {
+			outState.putInt(TEAM2_POINTS, Integer.parseInt(mPointsTeam2EditText.getText().toString()));
+		}
+	}
+	
+	@Override
+	protected void onRestoreInstanceState (Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		if (savedInstanceState != null) {
+			if (savedInstanceState.getBoolean(TEAM1_RADIO, false) == true) {
+				mTeam1RadioButton.setChecked(true);
+			}
+			else if (savedInstanceState.getBoolean(TEAM2_RADIO, false) == true) {
+				mTeam2RadioButton.setChecked(true);
+			}
+			if (savedInstanceState.getBoolean(BELA_CHECK, false) == true) {
+				mBelaCheckBox.setChecked(true);
+			}
+			if (savedInstanceState.getBoolean(ALL_TRICKS_CHECK, false) == true) {
+				mAllTricksCheckBox.setChecked(true);
+				mGamePointsAllTricksTextView.setTextColor(getResources().getColor(R.color.list_blue));
+			}
+			mTeam1Declarations = savedInstanceState.getInt(TEAM1_DECLARATIONS, 0);
+			mTeam2Declarations = savedInstanceState.getInt(TEAM2_DECLARATIONS, 0);
+			if (mTeam1Declarations != 0 || mTeam2Declarations != 0) {
+				enableDeclaration(true);
+			}
+			setGamePoints();
+			if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
+				mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
+			}
+			else if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
+				mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
+			}
+		}
 	}
 	
 	@Override
