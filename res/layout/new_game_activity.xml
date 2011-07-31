@@ -81,7 +81,7 @@
 					android:gravity="left"
 					android:paddingLeft="5dip"
 					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:textColor="@color/list_blue"
+					android:textColor="@color/grey"
 					/>
 				<TextView
 					android:id="@+id/game_points_all_tricks"
@@ -90,7 +90,7 @@
 					android:layout_height="wrap_content"
 					android:gravity="center"
 					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:textColor="#444444"
+					android:textColor="@color/grey"
 					android:text="@string/all_tricks"
 					/>
 				<TextView
@@ -101,7 +101,7 @@
 					android:gravity="right"
 					android:paddingRight="5dip"
 					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:textColor="@color/list_blue"
+					android:textColor="@color/grey"
 					/>
 			</LinearLayout>
 			<TextView
