@@ -54,14 +54,14 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	private Button mCancelButton;
 	
 	public static final String MATCH_ID = "match_id";
-	private static final String TEAM1_DECLARATIONS = "Team1Declarations";
-	private static final String TEAM2_DECLARATIONS = "Team2Declarations";
+	private static final String TEAM_DECLARATIONS = "TeamDeclarations";
 	private static final String TEAM1_RADIO = "Team1RadioButton";
 	private static final String TEAM2_RADIO = "Team2RadioButton";
 	private static final String BELA_CHECK = "BelaCheckBox";
 	private static final String ALL_TRICKS_CHECK = "AllTricksCheckBox";
 	private static final String TEAM1_POINTS = "Team1Points";
 	private static final String TEAM2_POINTS = "Team2Points";
+	private static final String TEAM_POINTS_FOCUS = "TeamPointsFocus";
 	
 	
 	@Override
@@ -113,13 +113,13 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	@Override
 	protected void onSaveInstanceState (Bundle outState) {
 		super.onSaveInstanceState(outState); 
-		outState.putInt(TEAM1_DECLARATIONS, mTeam1Declarations);
-		outState.putInt(TEAM2_DECLARATIONS, mTeam2Declarations);
 		if (mTeam1RadioButton.isChecked()) {
 			outState.putBoolean(TEAM1_RADIO, true);
+			outState.putInt(TEAM_DECLARATIONS, mTeam1Declarations);
 		}
 		else if (mTeam2RadioButton.isChecked()) {
 			outState.putBoolean(TEAM2_RADIO, true);
+			outState.putInt(TEAM_DECLARATIONS, mTeam2Declarations);
 		}
 		if (mBelaCheckBox.isChecked()) {
 			outState.putBoolean(BELA_CHECK, true);
@@ -130,8 +130,14 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		if (mPointsTeam1EditText.getText().toString().equals("") == false) {
 			outState.putInt(TEAM1_POINTS, Integer.parseInt(mPointsTeam1EditText.getText().toString()));
 		}
-		else if (mPointsTeam2EditText.getText().toString().equals("") == false) {
+		if (mPointsTeam2EditText.getText().toString().equals("") == false) {
 			outState.putInt(TEAM2_POINTS, Integer.parseInt(mPointsTeam2EditText.getText().toString()));
+		}
+		if (mPointsTeam1EditText.isFocused()) {
+			outState.putInt(TEAM_POINTS_FOCUS, MatchData.TEAM1);
+		}
+		else if (mPointsTeam2EditText.isFocused()) {
+			outState.putInt(TEAM_POINTS_FOCUS, MatchData.TEAM2);
 		}
 	}
 	
@@ -139,30 +145,46 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	protected void onRestoreInstanceState (Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
 		if (savedInstanceState != null) {
+			final int teamDeclarations = savedInstanceState.getInt(TEAM_DECLARATIONS, 0);
 			if (savedInstanceState.getBoolean(TEAM1_RADIO, false) == true) {
 				mTeam1RadioButton.setChecked(true);
+				selectDeclarationsTeam(MatchData.TEAM1);
 			}
 			else if (savedInstanceState.getBoolean(TEAM2_RADIO, false) == true) {
 				mTeam2RadioButton.setChecked(true);
+				selectDeclarationsTeam(MatchData.TEAM2);
 			}
+			addDeclarations(teamDeclarations);
 			if (savedInstanceState.getBoolean(BELA_CHECK, false) == true) {
 				mBelaCheckBox.setChecked(true);
+				addBela();
 			}
 			if (savedInstanceState.getBoolean(ALL_TRICKS_CHECK, false) == true) {
 				mAllTricksCheckBox.setChecked(true);
 				mGamePointsAllTricksTextView.setTextColor(getResources().getColor(R.color.list_blue));
 			}
-			mTeam1Declarations = savedInstanceState.getInt(TEAM1_DECLARATIONS, 0);
-			mTeam2Declarations = savedInstanceState.getInt(TEAM2_DECLARATIONS, 0);
-			if (mTeam1Declarations != 0 || mTeam2Declarations != 0) {
-				enableDeclaration(true);
-			}
 			setGamePoints();
-			if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
-				mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
+			if (savedInstanceState.getInt(TEAM_POINTS_FOCUS, -1) == MatchData.TEAM2) {
+				if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
+					mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
+				}
+				if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
+					mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
+				}
+				else {
+					mPointsTeam2EditText.setText("");
+				}
 			}
-			else if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
-				mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
+			else {
+				if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
+					mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
+				}
+				if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
+					mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
+				}
+				else {
+					mPointsTeam1EditText.setText("");
+				}
 			}
 		}
 	}
@@ -186,6 +208,20 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	public void selectDeclarationsTeam(final int team) {
+		
+		if (mDeclarationTeam == 0)
+			enableDeclaration(true);
+		
+		if (mDeclarationTeam != team) {
+			mDeclarationTeam = team;
+			setBelaCheckBoxLabel(team);
+			resetDeclarations();
+			resetGamePoints();
+			resetPoints(false);
+		}
 	}
 	
 	private class AllTricksOnClickListener implements CheckBox.OnClickListener {
@@ -221,7 +257,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		}
 		
 		public void onClick(View view) {
-			
+						
 			addDeclarations(mAdd);
 			setGamePoints();
 			resetPoints(false);
@@ -239,16 +275,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		
 		public void onClick(View view) {
 			
-			if (mDeclarationTeam == 0)
-				enableDeclaration(true);
-			
-			if (mDeclarationTeam != mTeam) {
-				mDeclarationTeam = mTeam;
-				setBelaCheckBoxLabel(mTeam);
-				resetDeclarations();
-				resetGamePoints();
-				resetPoints(false);
-			}
+			selectDeclarationsTeam(mTeam);
 		}
 	}
 	
@@ -348,10 +375,16 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	
 	private void addDeclarations(Integer points) {
 		
-		if (mDeclarationTeam == MatchData.TEAM1)
+		if (mDeclarationTeam == MatchData.TEAM1) {
 			mTeam1Declarations += points;
-		else if (mDeclarationTeam == MatchData.TEAM2)
+			if (mTeam1Declarations != 0)
+				mGamePointsTeam1TextView.setTextColor(getResources().getColor(R.color.list_blue));
+		}
+		else if (mDeclarationTeam == MatchData.TEAM2) {
 			mTeam2Declarations += points;
+			if (mTeam2Declarations != 0)
+				mGamePointsTeam2TextView.setTextColor(getResources().getColor(R.color.list_blue));
+		}
 	}
 	
 	private void addBela() {
@@ -359,17 +392,23 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		if (mBelaCheckBox.isChecked() == true) {
 			if (mDeclarationTeam == MatchData.TEAM1) {
 				mTeam2Declarations = mDefaultBelaDeclarations;
+				if (mTeam2Declarations != 0)
+					mGamePointsTeam2TextView.setTextColor(getResources().getColor(R.color.list_blue));
 			}
 			else if (mDeclarationTeam == MatchData.TEAM2) {
 				mTeam1Declarations = mDefaultBelaDeclarations;
+				if (mTeam1Declarations != 0)
+					mGamePointsTeam1TextView.setTextColor(getResources().getColor(R.color.list_blue));
 			}
 		}
 		else {
 			if (mDeclarationTeam == MatchData.TEAM1) {
 				mTeam2Declarations = 0;
+				mGamePointsTeam2TextView.setTextColor(getResources().getColor(R.color.grey));
 			}
 			else if (mDeclarationTeam == MatchData.TEAM2) {
 				mTeam1Declarations = 0;
+				mGamePointsTeam1TextView.setTextColor(getResources().getColor(R.color.grey));
 			}
 		}
 	}
@@ -420,7 +459,9 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	private void resetGamePoints() {
 		
 		mTeam1Declarations = 0;
+		mGamePointsTeam1TextView.setTextColor(getResources().getColor(R.color.grey));
 		mTeam2Declarations = 0;
+		mGamePointsTeam2TextView.setTextColor(getResources().getColor(R.color.grey));
 		mGamePoints = mDefaultGamePoints;
 		setGamePoints();
 	}
