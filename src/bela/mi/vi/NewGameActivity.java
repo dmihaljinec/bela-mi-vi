@@ -127,12 +127,8 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		if (mAllTricksCheckBox.isChecked()) {
 			outState.putBoolean(ALL_TRICKS_CHECK, true);
 		}
-		if (mPointsTeam1EditText.getText().toString().equals("") == false) {
-			outState.putInt(TEAM1_POINTS, Integer.parseInt(mPointsTeam1EditText.getText().toString()));
-		}
-		if (mPointsTeam2EditText.getText().toString().equals("") == false) {
-			outState.putInt(TEAM2_POINTS, Integer.parseInt(mPointsTeam2EditText.getText().toString()));
-		}
+		outState.putString(TEAM1_POINTS, mPointsTeam1EditText.getText().toString());
+		outState.putString(TEAM2_POINTS, mPointsTeam2EditText.getText().toString());
 		if (mPointsTeam1EditText.isFocused()) {
 			outState.putInt(TEAM_POINTS_FOCUS, MatchData.TEAM1);
 		}
@@ -165,26 +161,12 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			}
 			setGamePoints();
 			if (savedInstanceState.getInt(TEAM_POINTS_FOCUS, -1) == MatchData.TEAM2) {
-				if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
-					mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
-				}
-				if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
-					mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
-				}
-				else {
-					mPointsTeam2EditText.setText("");
-				}
+				mPointsTeam1EditText.setText(savedInstanceState.getString(TEAM1_POINTS));
+				mPointsTeam2EditText.setText(savedInstanceState.getString(TEAM2_POINTS));
 			}
 			else {
-				if (savedInstanceState.getInt(TEAM2_POINTS, -1) != -1) {
-					mPointsTeam2EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM2_POINTS)));
-				}
-				if (savedInstanceState.getInt(TEAM1_POINTS, -1) != -1) {
-					mPointsTeam1EditText.setText(Integer.toString(savedInstanceState.getInt(TEAM1_POINTS)));
-				}
-				else {
-					mPointsTeam1EditText.setText("");
-				}
+				mPointsTeam2EditText.setText(savedInstanceState.getString(TEAM2_POINTS));
+				mPointsTeam1EditText.setText(savedInstanceState.getString(TEAM1_POINTS));
 			}
 		}
 	}
@@ -437,11 +419,23 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			Integer team1Points = 0;
 			Integer team2Points = 0;
 			
-			if (mPointsTeam1EditText.getText().toString().contentEquals("") == false)
-				team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
+			if (mPointsTeam1EditText.getText().toString().contentEquals("") == false) {
+				try {
+					team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
+				}
+				catch (Exception e) {
+					team1Points = 0;
+				}
+			}
 			
-			if (mPointsTeam2EditText.getText().toString().contentEquals("") == false)
-				team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
+			if (mPointsTeam2EditText.getText().toString().contentEquals("") == false) {
+				try {
+					team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
+				}
+				catch (Exception e) {
+					team2Points = 0;
+				}
+			}
 			
 			if (mTeamSetPoints == MatchData.TEAM1){
 				team1Points = mGamePoints - team2Points;
