@@ -302,8 +302,14 @@ public class NewGameActivity extends Activity implements OnClickListener {
 				mOkButton.setEnabled(false);
 				return;
 			}
-			
-			primaryNumber = Integer.parseInt(primary.toString());
+			try {
+				primaryNumber = Integer.parseInt(primary.toString());
+			}
+			catch (Exception e) {
+				// illegal number entered
+				mOkButton.setEnabled(false);
+				return;
+			}
 			if (mSecondary.getText().toString().contentEquals("") == true) {
 				if (primaryNumber == mGamePoints) {
 					mSecondary.setText(secondaryNumber.toString());
@@ -312,7 +318,13 @@ public class NewGameActivity extends Activity implements OnClickListener {
 				}
 			}
 			else {
-				secondaryNumber = Integer.parseInt(mSecondary.getText().toString());
+				try {
+					secondaryNumber = Integer.parseInt(mSecondary.getText().toString());
+				}
+				catch (Exception e) {
+					// illegal number entered
+					secondaryNumber = 0;
+				}
 				if (mEqualPoints == false && primaryNumber == secondaryNumber ){
 					mOkButton.setEnabled(false);
 					return;

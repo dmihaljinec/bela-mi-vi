@@ -89,7 +89,7 @@
 	<string name="all_tricks">All Tricks</string>
 	<string name="bela">Belote</string>
 	<!--  Help dialog -->
-	<string name="new_game_activity_help_message">In a game where game points vary from default value, there were either declarations or all tricks.\n\nTo set declarations select side by pressing declaration team radio button. With +20 and +50 buttons enter declarations value. If opposite team declared Bela, press \'Bela\' check box. Switching between declaration teams will reset game points to default.\n\nIf game ended with all tricks owned by one team, press \'All Tricks\' check box.\n\nEnter team points only for one side, other will be calculated automatically based on game points. Take into account that declarations are not added to team points automatically.</string>
+	<string name="new_game_activity_help_message">In a game where game points vary from default value, there were either declarations or all tricks.\n\nTo set declarations select side by pressing declaration team radio button. With +20 and +50 buttons enter declarations value. If opposite team declared Belote, press \'Belote\' check box. Switching between declaration teams will reset game points to default.\n\nIf game ended with all tricks owned by one team, press \'All Tricks\' check box.\n\nEnter team points only for one side, other will be calculated automatically based on game points. Take into account that declarations are not added to team points automatically.</string>
 
 	<!-- StatisticsActivity -->
 	<string name="statistics_activity_title">Match Statistics</string>
