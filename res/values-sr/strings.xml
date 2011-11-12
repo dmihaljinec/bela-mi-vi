@@ -40,7 +40,7 @@
 	<string name="game_result">Zbroj</string>
 	<string name="difference">Razlika</string>
 	<!--  Help dialog -->
-	<string name="match_activity_help_message">Na vrhu ekrana nalazi se popis strana te trenutni rezultat u partijama.\n\nDodajte novu igru pritiskom na tipku \'Nova igra\' koja se nalazi pri vrhu ekrana ili odaberite \'Nova igra\' iz izbornika. Poredak igara u listi je kronološki.\n\nNa dnu ekrana nalazi se zbroj svih igara u trenutnoj partiji te razlika između strana.\n\nBrisanje igre moguće je dugim pristiskom na željenu igru u listi.\n\nZa listu svih partija u trenutnom meču odaberite \'Lista partija\' iz izbornika.\n\nZa pregled statistike trenutnog meča odaberite \'Statistika meča\' iz izbornika.</string>
+	<string name="match_activity_help_message">Na vrhu ekrana nalazi se popis strana te trenutni rezultat u partijama.\n\nDodajte novu igru pritiskom na tipku \'Nova igra\' koja se nalazi pri vrhu ekrana ili odaberite \'Nova igra\' iz izbornika. Poredak igara u listi je kronološki.\n\nNa dnu ekrana nalazi se zbroj svih igara u trenutnoj partiji te razlika između strana.\n\nUređivanje ili brisanje igre moguće je dugim pristiskom na željenu igru u listi.\n\nZa listu svih partija u trenutnom meču odaberite \'Lista partija\' iz izbornika.\n\nZa pregled statistike trenutnog meča odaberite \'Statistika meča\' iz izbornika.</string>
 
 	<!-- Global -->
 	<string name="app_name">BelaMiVi</string>
@@ -57,10 +57,11 @@
 	<!-- GameActivity -->
 	<string name="game_activity_title">Lista igara</string>
 	<!--  Help dialog -->
-	<string name="game_activity_help_message">Prikazuje listu igara u trenutnoj partiji, poredane kronološki. Dugim pritiskom na željenu igru, moguće ju je obrisati, ali isključivo ukoliko je trenutna lista igara iz posljednje partije u meču.</string>
+	<string name="game_activity_help_message">Prikazuje listu igara u trenutnoj partiji, poredane kronološki. Dugim pritiskom na željenu igru, moguće ju je urediti ili obrisati, ali isključivo ukoliko je trenutna lista igara iz posljednje partije u meču.</string>
 
 	<!-- GameList -->
 	<string name="new_game">Nova igra</string>
+	<string name="edit_game">Uredi</string>
 	<!-- Delete game confirmation dialog -->
 	<string name="remove_game">Obriši</string>
 	<string name="game_delete_conformation">Igra će biti obrisana</string>
