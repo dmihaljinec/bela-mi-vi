@@ -70,7 +70,6 @@ public class MatchData extends Data {
 	@Override
 	public void removeGame(Integer gameId) {
 		
-		//mCurrentSetId = super.getActiveSet(mMatchId);
 		mCurrentSetId = super.getGameSet(gameId);
 		super.removeGame(gameId);
 		if (super.getGamesCursor(mCurrentSetId).getCount() == 0) {
@@ -80,6 +79,13 @@ public class MatchData extends Data {
 		else {
 			updateSetWinner();
 		}
+	}
+	
+	@Override
+	public void updateGame(Integer gameId, boolean allTricks, Integer team1Declarations, Integer team2Declarations, Integer team1Points, Integer team2Points) {
+		super.updateGame(gameId, allTricks, team1Declarations, team2Declarations, team1Points, team2Points);
+		mCurrentSetId = super.getGameSet(gameId);
+		updateSetWinner();
 	}
 	
 	public void removeAllGames() {

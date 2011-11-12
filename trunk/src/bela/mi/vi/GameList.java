@@ -38,6 +38,7 @@ public class GameList {
 	private OnDeleteListItemListener mDeleteListItemListener;
 	
 	public final static int NEW_GAME = 1;
+	public final static int EDIT_GAME = 2;
 	private static final Integer HEADER_POSITION = 0;
 	
 	public GameList(Context context, MatchData matchData, Integer matchId, Integer setId, boolean addable, boolean deletable) {
@@ -113,15 +114,20 @@ public class GameList {
 	// Callback from Activity when Context Menu is selected 
 	public boolean onContextItemSelected(MenuItem item) {
 	
+		if (mCanDelete == false)
+			return false;
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+		Cursor cursor = (Cursor) mGameList.getAdapter().getItem(info.position);
+		int gameId = cursor.getInt(cursor.getColumnIndex(MatchData.GAMES_ID));
 		switch (item.getItemId()) {
 		case R.id.remove_game:
-			if (mCanDelete == false)
-				return false;
-			Cursor cursor = (Cursor) mGameList.getAdapter().getItem(info.position);
-			mRemoveGameId = cursor.getInt(cursor.getColumnIndex(MatchData.GAMES_ID));
+			mRemoveGameId = gameId;
 			confirmDeleteDialog();
 			return true;
+		case R.id.edit_game:
+			editGame(gameId);
+			return true;
+			
 		default:
 			return false;
 		}
@@ -157,6 +163,13 @@ public class GameList {
 		Intent gameIntent = new Intent(mActivity, NewGameActivity.class);
 		gameIntent.putExtra(NewGameActivity.MATCH_ID, mMatchId);
 		mActivity.startActivityForResult(gameIntent, NEW_GAME);
+	}
+	
+	public void editGame(final int gameId) {
+		Intent gameIntent = new Intent(mActivity, NewGameActivity.class);
+		gameIntent.putExtra(NewGameActivity.MATCH_ID, mMatchId);
+		gameIntent.putExtra(NewGameActivity.GAME_ID, gameId);
+		mActivity.startActivityForResult(gameIntent, EDIT_GAME);
 	}
 	
 	public void setOnDeleteListItemListener(OnDeleteListItemListener listener) {
