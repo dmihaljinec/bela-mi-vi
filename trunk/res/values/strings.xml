@@ -40,7 +40,7 @@
 	<string name="game_result">Total</string>
 	<string name="difference">Difference</string>
 	<!--  Help dialog -->
-	<string name="match_activity_help_message">Top of the screen shows sides and current sets result.\n\nAdd a new game by pressing \'New Game\' button on top of the screen or by selecting \'New Game\' from the options menu. The latest game will be shown at the bottom of the list.\n\nAt the bottom of the screen there\'s a number of total game points in current set along with the difference between sides.\n\nDelete game by long pressing it.\n\nTo see list of sets in current match select \'List of Sets\' from the options menu.\n\nTo see match statistics select \'Match Statistics\' from the options menu.</string>
+	<string name="match_activity_help_message">Top of the screen shows sides and current sets result.\n\nAdd a new game by pressing \'New Game\' button on top of the screen or by selecting \'New Game\' from the options menu. The latest game will be shown at the bottom of the list.\n\nAt the bottom of the screen there\'s a number of total game points in current set along with the difference between sides.\n\nEdit or Delete game by long pressing it.\n\nTo see list of sets in current match select \'List of Sets\' from the options menu.\n\nTo see match statistics select \'Match Statistics\' from the options menu.</string>
 
 	<!-- Global -->
 	<string name="app_name">BelaMiVi</string>
@@ -57,10 +57,12 @@
 	<!-- GameActivity -->
 	<string name="game_activity_title">List of Games</string>
 	<!--  Help dialog -->
-	<string name="game_activity_help_message">Displays list of games chronologically. It\'s possible to delete game by long pressing it but only if this is the last set in a match.</string>
+	<string name="game_activity_help_message">Displays list of games chronologically. It\'s possible to edit or delete game by long pressing it but only if this is the last set in a match.</string>
 
 	<!-- GameList -->
 	<string name="new_game">New Game</string>
+	<string name="new_edit_game">Edit Game</string>
+	<string name="edit_game">Edit</string>
 	<!-- Delete game confirmation dialog -->
 	<string name="remove_game">Delete</string>
 	<string name="game_delete_conformation">Game will be deleted</string>
