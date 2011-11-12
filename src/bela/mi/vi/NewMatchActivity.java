@@ -135,6 +135,9 @@ public class NewMatchActivity extends Activity implements OnClickListener {
 		Map<String, Integer> players = new HashMap<String, Integer>();
 		for (int i = 0; i < 4; ++i) {
 			Cursor cursor = (Cursor) mPlayersSpinner[i].getSelectedItem();
+			if (cursor == null) {
+				continue;
+			}
 			players.put(cursor.getString(cursor.getColumnIndex(Data.PLAYERS_NAME)), 1);
 		}
 		if (players.size() != 4) {

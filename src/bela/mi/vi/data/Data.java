@@ -311,6 +311,14 @@ public class Data {
 		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_GAMES, null, values);
 	}
 	
+	public Cursor getGame(Integer gameId) {
+		String[] gamesColumns = new String[] { Data.GAMES_ID, Data.GAMES_TEAM1_POINTS, Data.GAMES_TEAM2_POINTS,
+				   Data.GAMES_TEAM1_DECLARATIONS, Data.GAMES_TEAM2_DECLARATIONS, Data.GAMES_ALL_TRICKS };
+		
+		String gamesSelection = Data.GAMES_ID + "=" + gameId.toString();
+		return belaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
+	}
+	
 	public void updateGame(Integer gameId, boolean allTricks, Integer team1Declarations, Integer team2Declarations, Integer team1Points, Integer team2Points) {
 		
 		ContentValues values = new ContentValues();

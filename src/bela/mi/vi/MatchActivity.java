@@ -113,6 +113,7 @@ public class MatchActivity extends Activity {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch(requestCode) {
 		case GameList.NEW_GAME:
+		case GameList.EDIT_GAME:
 			if (resultCode == Activity.RESULT_OK) {
 				mGameList.resultOk();
 				if (mMatchData.getActiveSet() == null) {
