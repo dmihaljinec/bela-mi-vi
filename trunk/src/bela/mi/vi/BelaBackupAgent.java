@@ -7,9 +7,11 @@ import android.app.backup.SharedPreferencesBackupHelper;
 
 public class BelaBackupAgent extends BackupAgentHelper {
 
+	private final static String PREFS = "shared_prefs";
+	
     public void onCreate() {
+    	
     	addHelper(Data.DB_NAME, new FileBackupHelper(this, "../databases/" + Data.DB_NAME));
-
-        //addHelper("shared_prefs", new SharedPreferencesBackupHelper(this, "settings", "raw"));
+        addHelper(PREFS, new SharedPreferencesBackupHelper(this, "bela.mi.vi_preferences"));
     }
 }
