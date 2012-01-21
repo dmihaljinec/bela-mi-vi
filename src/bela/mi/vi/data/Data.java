@@ -23,7 +23,7 @@ public class Data {
 	public static final int ALL_TRICKS = 90;
 	public static final int SET_LIMIT = 1001;
 	
-	protected static final String DB_NAME = "Bela.db";
+	public static final String DB_NAME = "Bela.db";
 	protected static final Integer DB_VERSION = 1;
 	protected static final String SQL_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS";
 	protected static final String SQL_DROP_TABLE = "DROP TABLE IF EXISTS";
