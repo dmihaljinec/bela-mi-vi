@@ -43,6 +43,7 @@ public class SettingsActivity  extends PreferenceActivity implements OnSharedPre
 		
 		Preference pref = findPreference(key);
 		setSummary(pref);
+		BelaBackupManager.dataChanged(getApplication());
 	}
 }
 
