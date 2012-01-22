@@ -111,6 +111,6 @@
 	<!-- AboutDialog -->
 	<string name="about">About</string>
 	<string name="version">Version</string>
-	<string name="author">© 2011 Damir Mihaljinec</string>
+	<string name="author">© 2011 - 2012 Damir Mihaljinec</string>
 	<string name="web">http://code.google.com/p/bela-mi-vi/</string>
 </resources>
