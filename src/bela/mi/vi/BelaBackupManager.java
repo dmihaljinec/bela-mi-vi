@@ -6,7 +6,7 @@ public class BelaBackupManager {
 	
 	private static Boolean mBackupManagerAvailable = null;
 
-    protected static void dataChanged(Context context) {
+    public static void dataChanged(Context context) {
 
         if (mBackupManagerAvailable == null) {
         	try {
