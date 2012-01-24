@@ -1,5 +1,6 @@
 package bela.mi.vi.data;
 
+import bela.mi.vi.BelaBackupManager;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -12,9 +13,10 @@ import android.database.sqlite.*;
  */
 public class Data {
 	
-	private BelaOpenHandler belaOpenHandler;
-	private SQLiteStatement winnerCount;
-	private SQLiteStatement activeSet;
+	private BelaOpenHandler mBelaOpenHandler;
+	private SQLiteStatement mWinnerCount;
+	private SQLiteStatement mActiveSet;
+	private Context mContext;
 	
 	public static final int TEAM1 = 1;
 	public static final int TEAM2 = 2;
@@ -77,9 +79,10 @@ public class Data {
 	
 	public Data(Context context) {
 		
-		belaOpenHandler = new BelaOpenHandler(context, Data.DB_NAME, Data.DB_VERSION);
-		winnerCount = belaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_WINNER_COUNT);
-		activeSet = belaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_ACTIVE_SET);
+		mBelaOpenHandler = new BelaOpenHandler(context, Data.DB_NAME, Data.DB_VERSION);
+		mWinnerCount = mBelaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_WINNER_COUNT);
+		mActiveSet = mBelaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_ACTIVE_SET);
+		mContext = context;
 	}
 	
 	public Cursor getPlayersCursor() {
@@ -113,21 +116,24 @@ public class Data {
 			TABLE_PLAYERS + "." + PLAYERS_ID + "=" + TABLE_MATCHES + "." + MATCHES_TEAM2_PLAYER1 +
 			"))) GROUP BY " + TABLE_PLAYERS + "." + PLAYERS_ID + ", " + TABLE_PLAYERS + "." +
 			PLAYERS_NAME + ") AS T1 ON T1._ID = T2._ID ORDER BY T2.NAME ASC";
-		return belaOpenHandler.getReadableDatabase().rawQuery(query, null); 
+		return mBelaOpenHandler.getReadableDatabase().rawQuery(query, null); 
 	}
 	
 	public Integer addPlayer(String name) {
 		
 		ContentValues values = new ContentValues();
 		values.put(Data.PLAYERS_NAME, name);
-		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_PLAYERS, null, values);
+		Integer playerId = (int) mBelaOpenHandler.getWritableDatabase().insert(Data.TABLE_PLAYERS, null, values);
+		BelaBackupManager.dataChanged(mContext);
+		return playerId;
 	}
 	
 	public boolean removePlayer(Integer id) {
 		
 		String whereClause = Data.PLAYERS_ID + "=" + id.toString();
 		try {
-			belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, whereClause, null);
+			mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, whereClause, null);
+			BelaBackupManager.dataChanged(mContext);
 		}
 		catch (SQLiteException e) {
 			return false;
@@ -138,7 +144,8 @@ public class Data {
 	public boolean removeAllPlayers() {
 		
 		try {
-			belaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, null, null);
+			mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_PLAYERS, null, null);
+			BelaBackupManager.dataChanged(mContext);
 		}
 		catch (SQLiteException e) {
 			return false;
@@ -174,23 +181,23 @@ public class Data {
 			Data.MATCHES_TIME + " DESC";
 		
 		if (limit != null)
-			return belaOpenHandler.getReadableDatabase().rawQuery(query + " LIMIT " + limit.toString(), null);
+			return mBelaOpenHandler.getReadableDatabase().rawQuery(query + " LIMIT " + limit.toString(), null);
 		else
-			return belaOpenHandler.getReadableDatabase().rawQuery(query, null);
+			return mBelaOpenHandler.getReadableDatabase().rawQuery(query, null);
 	}
 	
 	public Integer getMatchLimit(Integer matchId) {
 		
 		String[] matchesColumns = new String[] { Data.MATCHES_SET_LIMIT };
 		String matchesSelection = Data.MATCHES_ID + "=" + matchId.toString();
-		Cursor cursor = belaOpenHandler.getReadableDatabase().query(Data.TABLE_MATCHES, matchesColumns, matchesSelection, null, null, null, null);
+		Cursor cursor = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_MATCHES, matchesColumns, matchesSelection, null, null, null, null);
 		cursor.moveToFirst();
 		return cursor.getInt(0);
 	}
 	
 	protected Cursor rawQuery(String sqlQuery) {
 		
-		return belaOpenHandler.getReadableDatabase().rawQuery(sqlQuery, null);
+		return mBelaOpenHandler.getReadableDatabase().rawQuery(sqlQuery, null);
 	}
 	
 	public Integer addMatch(String date, String time, Integer team1Player1Id, Integer team1Player2Id, Integer team2Player1Id, Integer team2Player2Id, Integer setLimit) {
@@ -202,40 +209,46 @@ public class Data {
 		values.put(Data.MATCHES_TEAM1_PLAYER2, team1Player2Id);
 		values.put(Data.MATCHES_TEAM2_PLAYER1, team2Player1Id);
 		values.put(Data.MATCHES_TEAM2_PLAYER2, team2Player2Id);
-		values.put(Data.MATCHES_SET_LIMIT, setLimit); 
-		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_MATCHES, null, values);
+		values.put(Data.MATCHES_SET_LIMIT, setLimit);
+		Integer matchId = (int) mBelaOpenHandler.getWritableDatabase().insert(Data.TABLE_MATCHES, null, values);
+		BelaBackupManager.dataChanged(mContext);
+		return matchId;
 	}
 	
 	public void removeMatch(Integer id) {
 		
 		String whereClause = Data.MATCHES_ID + "=" + id.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_MATCHES, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_MATCHES, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	public void removeAllMatches() {
 		
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_MATCHES, null, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_MATCHES, null, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 
 	protected Integer addSet(Integer matchId) {
 		
 		ContentValues values = new ContentValues();
 		values.put(Data.SETS_MATCH, matchId);
-		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_SETS, null, values);
+		Integer setId = (int) mBelaOpenHandler.getWritableDatabase().insert(Data.TABLE_SETS, null, values);
+		BelaBackupManager.dataChanged(mContext);
+		return setId;
 	}
 	
 	protected Integer getWinnerCount(Integer matchId, Integer team) {
 		
-		winnerCount.bindLong(1, matchId);
-		winnerCount.bindLong(2, team);
-		return (int) winnerCount.simpleQueryForLong();
+		mWinnerCount.bindLong(1, matchId);
+		mWinnerCount.bindLong(2, team);
+		return (int) mWinnerCount.simpleQueryForLong();
 	}
 	
 	protected Integer getActiveSet(Integer matchId) {
 		
-		activeSet.bindLong(1, matchId);
+		mActiveSet.bindLong(1, matchId);
 		try {
-			return (int) activeSet.simpleQueryForLong();
+			return (int) mActiveSet.simpleQueryForLong();
 		}
 		catch (SQLiteDoneException e) {
 			return null;
@@ -247,7 +260,8 @@ public class Data {
 		ContentValues values = new ContentValues();
 		values.put(Data.SETS_WINNING_TEAM, team);
 		String whereClause = Data.SETS_ID + "=" + setId.toString();
-		belaOpenHandler.getWritableDatabase().update(Data.TABLE_SETS, values, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().update(Data.TABLE_SETS, values, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	public Integer getSetPoints(Integer setId, Integer team) {
@@ -265,7 +279,7 @@ public class Data {
 			return 0;
 		}
 		String[] gamesColumns = new String[] { column };
-		Cursor c = belaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
+		Cursor c = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 		c.moveToFirst();
 		return c.getInt(0);
 	}
@@ -273,13 +287,15 @@ public class Data {
 	protected void removeSet(Integer setId) {
 		
 		String whereClause = Data.SETS_ID + "=" + setId.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_SETS, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_SETS, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	public void removeAllSets(Integer matchId) {
 		
 		String whereClause = Data.SETS_MATCH + "=" + matchId.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_SETS, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_SETS, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	public Cursor getGamesCursor(Integer setId) {
@@ -287,14 +303,14 @@ public class Data {
 		String[] gamesColumns = new String[] { Data.GAMES_ID, Data.GAMES_TEAM1_POINTS, Data.GAMES_TEAM2_POINTS,
 											   Data.GAMES_TEAM1_DECLARATIONS, Data.GAMES_TEAM2_DECLARATIONS };
 		String gamesSelection = Data.GAMES_SET + "=" + setId.toString();
-		return belaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
+		return mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 	}
 	
 	protected Integer getGameSet(Integer gameId) {
 		
 		String[] gamesColumns = new String[] { Data.GAMES_SET };
 		String gamesSelection = Data.GAMES_ID + "=" + gameId.toString();
-		Cursor cursor = belaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
+		Cursor cursor = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 		cursor.moveToFirst();
 		return cursor.getInt(0);
 	}
@@ -308,15 +324,18 @@ public class Data {
 		values.put(Data.GAMES_TEAM2_DECLARATIONS, team2Declarations);
 		values.put(Data.GAMES_TEAM1_POINTS, team1Points);
 		values.put(Data.GAMES_TEAM2_POINTS, team2Points);
-		return (int) belaOpenHandler.getWritableDatabase().insert(Data.TABLE_GAMES, null, values);
+		Integer gameId = (int) mBelaOpenHandler.getWritableDatabase().insert(Data.TABLE_GAMES, null, values);
+		BelaBackupManager.dataChanged(mContext);
+		return gameId;
 	}
+		
 	
 	public Cursor getGame(Integer gameId) {
 		String[] gamesColumns = new String[] { Data.GAMES_ID, Data.GAMES_TEAM1_POINTS, Data.GAMES_TEAM2_POINTS,
 				   Data.GAMES_TEAM1_DECLARATIONS, Data.GAMES_TEAM2_DECLARATIONS, Data.GAMES_ALL_TRICKS };
 		
 		String gamesSelection = Data.GAMES_ID + "=" + gameId.toString();
-		return belaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
+		return mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 	}
 	
 	public void updateGame(Integer gameId, boolean allTricks, Integer team1Declarations, Integer team2Declarations, Integer team1Points, Integer team2Points) {
@@ -328,18 +347,21 @@ public class Data {
 		values.put(Data.GAMES_TEAM1_POINTS, team1Points);
 		values.put(Data.GAMES_TEAM2_POINTS, team2Points);
 		String whereClause = Data.GAMES_ID + "=" + gameId.toString();
-		belaOpenHandler.getWritableDatabase().update(Data.TABLE_GAMES, values, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().update(Data.TABLE_GAMES, values, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	protected void removeGame(Integer gameId) {
 		
 		String whereClause = Data.GAMES_ID + "=" + gameId.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_GAMES, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_GAMES, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 	
 	protected void removeAllGames(Integer setId) {
 		
 		String whereClause = Data.GAMES_SET + "=" + setId.toString();
-		belaOpenHandler.getWritableDatabase().delete(Data.TABLE_GAMES, whereClause, null);
+		mBelaOpenHandler.getWritableDatabase().delete(Data.TABLE_GAMES, whereClause, null);
+		BelaBackupManager.dataChanged(mContext);
 	}
 }
