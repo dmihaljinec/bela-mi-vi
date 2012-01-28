@@ -116,7 +116,7 @@ public class MatchActivity extends Activity {
 		case GameList.EDIT_GAME:
 			if (resultCode == Activity.RESULT_OK) {
 				mGameList.resultOk();
-				if (mMatchData.getActiveSet() == null) {
+				if (mMatchData.getActiveSet() == null && mActiveSet != null) {
 					mGameList.reset();
 					String score = mMatchData.getSetPoints(mActiveSet, MatchData.TEAM1).toString() + " - " +
 								   mMatchData.getSetPoints(mActiveSet, MatchData.TEAM2).toString();
