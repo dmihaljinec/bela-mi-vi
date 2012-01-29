@@ -72,13 +72,15 @@ public class MatchData extends Data {
 		
 		mCurrentSetId = super.getGameSet(gameId);
 		super.removeGame(gameId);
-		if (super.getGamesCursor(mCurrentSetId).getCount() == 0) {
+		Cursor gamesCursor = getGamesCursor(mCurrentSetId);
+		if (gamesCursor.getCount() == 0) {
 			super.removeSet(mCurrentSetId);
 			mCurrentSetId = null;
 		}
 		else {
 			updateSetWinner();
 		}
+		gamesCursor.close();
 	}
 	
 	@Override
@@ -119,7 +121,9 @@ public class MatchData extends Data {
 			query += Data.GAMES_TEAM2_POINTS + ">0";
 		Cursor cursor = super.rawQuery(query);
 		cursor.moveToFirst();
-		return cursor.getInt(0);
+		Integer matchAllTricks = cursor.getInt(0);
+		cursor.close();
+		return matchAllTricks;
 	}
 	
 	public Integer getMatchPassedGames(Integer team) {
@@ -139,7 +143,9 @@ public class MatchData extends Data {
 					 "." + Data.GAMES_ALL_TRICKS + "=1))";
 		Cursor cursor = super.rawQuery(query);
 		cursor.moveToFirst();
-		return cursor.getInt(0);
+		Integer matchPassedGames = cursor.getInt(0);
+		cursor.close();
+		return matchPassedGames;
 	}
 	
 	public Integer getMatchFallenGames(Integer team) {
@@ -153,7 +159,9 @@ public class MatchData extends Data {
 			query += Data.GAMES_TEAM2_POINTS + "=0";
 		Cursor cursor = super.rawQuery(query);
 		cursor.moveToFirst();
-		return cursor.getInt(0);
+		Integer matchFallenGames = cursor.getInt(0);
+		cursor.close();
+		return matchFallenGames;
 	}
 	
 	private void updateSetWinner() {

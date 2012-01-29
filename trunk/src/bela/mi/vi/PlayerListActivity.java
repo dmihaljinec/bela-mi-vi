@@ -3,7 +3,6 @@ package bela.mi.vi;
 import java.text.DecimalFormat;
 
 import bela.mi.vi.data.Data;
-import android.app.ListActivity;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.database.Cursor;
@@ -27,9 +26,8 @@ import android.text.InputType;
  *  
  * @author Damir Mihaljinec
  */
-public class PlayerListActivity extends ListActivity {
+public class PlayerListActivity extends DataListActivity {
 
-	private Data mData;
 	private Cursor mPlayers;
 	private Integer mRemovePlayerId;
 	private Integer mHeader = 1;

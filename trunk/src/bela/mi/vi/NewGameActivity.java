@@ -25,10 +25,9 @@ import android.preference.PreferenceManager;
  *  
  * @author Damir Mihaljinec
  */
-public class NewGameActivity extends Activity implements OnClickListener {
+public class NewGameActivity extends DataActivity implements OnClickListener {
 	
 	private Integer mMatchId;
-	private MatchData mMatchData;
 	private Integer mTeam1Declarations = 0;
 	private Integer mTeam2Declarations = 0;
 	private Integer mGamePoints;
@@ -78,7 +77,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			return;
         
 		mMatchId = extras.getInt(MATCH_ID);
-		mMatchData = new MatchData(this, mMatchId);
+		mData = new MatchData(this, mMatchId);
 		
 		if (extras.containsKey(GAME_ID)) {
 			mEditGameId = extras.getInt(GAME_ID);
@@ -364,10 +363,10 @@ public class NewGameActivity extends Activity implements OnClickListener {
 			Integer team1Points = Integer.parseInt(mPointsTeam1EditText.getText().toString());
 			Integer team2Points = Integer.parseInt(mPointsTeam2EditText.getText().toString());
 			if (mEditGameId != null) {
-				mMatchData.updateGame(mEditGameId, mAllTricksCheckBox.isChecked(), mTeam1Declarations, mTeam2Declarations, team1Points, team2Points);
+				mData.updateGame(mEditGameId, mAllTricksCheckBox.isChecked(), mTeam1Declarations, mTeam2Declarations, team1Points, team2Points);
 			}
 			else {
-				mMatchData.addGame(mAllTricksCheckBox.isChecked(), mTeam1Declarations, mTeam2Declarations, team1Points, team2Points);
+				((MatchData)mData).addGame(mAllTricksCheckBox.isChecked(), mTeam1Declarations, mTeam2Declarations, team1Points, team2Points);
 			}
 			setResult(Activity.RESULT_OK);
 			finish();
@@ -530,7 +529,7 @@ public class NewGameActivity extends Activity implements OnClickListener {
 	
 	private void editGame() {
 		
-		Cursor game = mMatchData.getGame(mEditGameId);
+		Cursor game = mData.getGame(mEditGameId);
 		game.moveToFirst();
 		final int team1Declarations = game.getInt(game.getColumnIndex(Data.GAMES_TEAM1_DECLARATIONS));
 		final int team2Declarations = game.getInt(game.getColumnIndex(Data.GAMES_TEAM2_DECLARATIONS));
@@ -558,5 +557,6 @@ public class NewGameActivity extends Activity implements OnClickListener {
 		mPointsTeam1EditText.setText(game.getString(game.getColumnIndex(Data.GAMES_TEAM1_POINTS)));
 		mPointsTeam1EditText.requestFocus();
 		mPointsTeam2EditText.setText(game.getString(game.getColumnIndex(Data.GAMES_TEAM2_POINTS)));
+		game.close();
 	}
 }

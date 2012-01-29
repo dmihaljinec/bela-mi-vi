@@ -1,7 +1,6 @@
 package bela.mi.vi;
 
 import bela.mi.vi.data.MatchData;
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,9 +12,8 @@ import android.view.MenuItem;
  *  
  * @author Damir Mihaljinec
  */
-public class GameActivity extends Activity {
+public class GameActivity extends DataActivity {
 	
-	private MatchData mMatchData;
 	private int mMatchId = 0;
 	private int mSetId = 0;
 	private GameList mGameList;
@@ -35,9 +33,9 @@ public class GameActivity extends Activity {
 		mMatchId = extras.getInt(MATCH_ID);
 		mSetId = extras.getInt(SET_ID);
 		boolean editable = extras.getBoolean(EDITABLE);
-		mMatchData = new MatchData(this, mMatchId);
+		mData = new MatchData(this, mMatchId);
 		
-		mGameList = new GameList(this, mMatchData, mMatchId, mSetId, false, editable);
+		mGameList = new GameList(this, (MatchData)mData, mMatchId, mSetId, false, editable);
 	}
 	
 	@Override

@@ -2,6 +2,11 @@ package bela.mi.vi;
 
 import android.content.Context;
 
+/**
+ * Backup manager that creates instance of android.app.backup.BackupManager if available.
+ * 
+ * @author Damir Mihaljinec
+ */
 public class BelaBackupManager {
 	
 	private static Boolean mBackupManagerAvailable = null;

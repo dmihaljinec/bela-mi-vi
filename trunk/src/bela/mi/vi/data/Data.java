@@ -13,7 +13,7 @@ import android.database.sqlite.*;
  */
 public class Data {
 	
-	private BelaOpenHandler mBelaOpenHandler;
+	private static BelaOpenHandler mBelaOpenHandler;
 	private SQLiteStatement mWinnerCount;
 	private SQLiteStatement mActiveSet;
 	private Context mContext;
@@ -79,17 +79,37 @@ public class Data {
 	
 	public Data(Context context) {
 		
-		mBelaOpenHandler = new BelaOpenHandler(context, Data.DB_NAME, Data.DB_VERSION);
+		if (mBelaOpenHandler == null) {
+			mBelaOpenHandler = new BelaOpenHandler(context, Data.DB_NAME, Data.DB_VERSION);
+		}
 		mWinnerCount = mBelaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_WINNER_COUNT);
 		mActiveSet = mBelaOpenHandler.getReadableDatabase().compileStatement(Data.SQL_SELECT_SETS_ACTIVE_SET);
 		mContext = context;
+	}
+	
+	public void close() {
+		
+		if (mWinnerCount != null) {
+	    	mWinnerCount.close();
+		}
+	    if (mActiveSet != null) {
+	    	mActiveSet.close();
+	    }
+	}
+	
+	public void finalClose() {
+		
+		if (mBelaOpenHandler != null) {
+			mBelaOpenHandler.close();
+			mBelaOpenHandler = null;
+		}
 	}
 	
 	public Cursor getPlayersCursor() {
 		
 		// This query return list of all players sorted ascending by player name. Each row will contain
 		// player id, player name, number of sets won and number of sets played
-		// This query was created by Krunoslav Puljiæ
+		// This query was created by Krunoslav Puljic
 		final String query = "SELECT T2." + PLAYERS_ID + " AS " + PLAYERS_ID + ", T2." + PLAYERS_NAME +
 			" AS " + PLAYERS_NAME + ", COALESCE(" + SETS_WON + ",0) AS " + SETS_WON +
 			", " + SETS_COUNT + " FROM (SELECT " + TABLE_PLAYERS + "." + PLAYERS_ID + " AS " +
@@ -192,7 +212,9 @@ public class Data {
 		String matchesSelection = Data.MATCHES_ID + "=" + matchId.toString();
 		Cursor cursor = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_MATCHES, matchesColumns, matchesSelection, null, null, null, null);
 		cursor.moveToFirst();
-		return cursor.getInt(0);
+		Integer matchLimit = cursor.getInt(0);
+		cursor.close();
+		return matchLimit;
 	}
 	
 	protected Cursor rawQuery(String sqlQuery) {
@@ -281,7 +303,9 @@ public class Data {
 		String[] gamesColumns = new String[] { column };
 		Cursor c = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 		c.moveToFirst();
-		return c.getInt(0);
+		Integer setPoints = c.getInt(0);
+		c.close();
+		return setPoints;
 	}
 	
 	protected void removeSet(Integer setId) {
@@ -312,7 +336,9 @@ public class Data {
 		String gamesSelection = Data.GAMES_ID + "=" + gameId.toString();
 		Cursor cursor = mBelaOpenHandler.getReadableDatabase().query(Data.TABLE_GAMES, gamesColumns, gamesSelection, null, null, null, null);
 		cursor.moveToFirst();
-		return cursor.getInt(0);
+		Integer gameSet = cursor.getInt(0);
+		cursor.close();
+		return gameSet;
 	}
 
 	protected Integer addGame(Integer setId, boolean allTricks, Integer team1Declarations, Integer team2Declarations, Integer team1Points, Integer team2Points) {

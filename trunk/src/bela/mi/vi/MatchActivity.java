@@ -17,10 +17,9 @@ import android.widget.Toast;
  *  
  * @author Damir Mihaljinec
  */
-public class MatchActivity extends Activity {
+public class MatchActivity extends DataActivity {
 	
 	private Integer mMatchId;
-	private MatchData mMatchData;
 	private GameList mGameList;
 	private String mDifference;
 	private Integer mActiveSet;
@@ -36,8 +35,8 @@ public class MatchActivity extends Activity {
 		if (extras == null)
 			return;
 		mMatchId = extras.getInt(MATCH_ID);
-		mMatchData = new MatchData(this, mMatchId);
-		mGameList = new GameList(this, mMatchData, mMatchId, null, true, true);
+		mData = new MatchData(this, mMatchId);
+		mGameList = new GameList(this, (MatchData)mData, mMatchId, null, true, true);
 		mGameList.setOnDeleteListItemListener(new GameList.OnDeleteListItemListener() {
 			
 			@Override
@@ -56,8 +55,8 @@ public class MatchActivity extends Activity {
 	public void onResume() {
 		
 		super.onResume();
-		if (mActiveSet != mMatchData.getActiveSet()){
-			mActiveSet = mMatchData.getActiveSet();
+		if (mActiveSet != ((MatchData)mData).getActiveSet()){
+			mActiveSet = ((MatchData)mData).getActiveSet();
 			mGameList.reset();
 		}
 		setSetsResult();
@@ -116,16 +115,16 @@ public class MatchActivity extends Activity {
 		case GameList.EDIT_GAME:
 			if (resultCode == Activity.RESULT_OK) {
 				mGameList.resultOk();
-				if (mMatchData.getActiveSet() == null && mActiveSet != null) {
+				if (((MatchData)mData).getActiveSet() == null && mActiveSet != null) {
 					mGameList.reset();
-					String score = mMatchData.getSetPoints(mActiveSet, MatchData.TEAM1).toString() + " - " +
-								   mMatchData.getSetPoints(mActiveSet, MatchData.TEAM2).toString();
+					String score = mData.getSetPoints(mActiveSet, MatchData.TEAM1).toString() + " - " +
+								   mData.getSetPoints(mActiveSet, MatchData.TEAM2).toString();
 					//Toast toast = Toast.makeText(this, score, Toast.LENGTH_SHORT);
 					Toast toast = Toast.makeText(this, score, Toast.LENGTH_LONG);
 					toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
 					toast.show();
 				}
-				mActiveSet = mMatchData.getActiveSet();
+				mActiveSet = ((MatchData)mData).getActiveSet();
 			}
 			else if (resultCode == Activity.RESULT_CANCELED) {
 				mGameList.resultCanceled();
@@ -137,16 +136,16 @@ public class MatchActivity extends Activity {
 	
 	private void setSetsResult() {
 		
-		Integer team1Sets = mMatchData.getWinnerCount(MatchData.TEAM1);
-		Integer team2Sets = mMatchData.getWinnerCount(MatchData.TEAM2);
+		Integer team1Sets = ((MatchData)mData).getWinnerCount(MatchData.TEAM1);
+		Integer team2Sets = ((MatchData)mData).getWinnerCount(MatchData.TEAM2);
 		TextView setsResult = (TextView) findViewById(R.id.score);
 		setsResult.setText(team1Sets.toString() + " - " + team2Sets.toString());
 	}
 	
 	private void setGamesResult() {
 		
-		Integer team1 = mMatchData.getSetPoints(MatchData.TEAM1);
-		Integer team2 = mMatchData.getSetPoints(MatchData.TEAM2);
+		Integer team1 = ((MatchData)mData).getSetPoints(MatchData.TEAM1);
+		Integer team2 = ((MatchData)mData).getSetPoints(MatchData.TEAM2);
 		TextView gamesResult = (TextView) findViewById(R.id.set_score);
 		gamesResult.setText(team1.toString() + " - " + team2.toString());
 		TextView difference = (TextView) findViewById(R.id.difference);

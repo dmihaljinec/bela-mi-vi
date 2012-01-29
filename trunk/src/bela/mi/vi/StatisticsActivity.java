@@ -1,7 +1,6 @@
 package bela.mi.vi;
 
 import bela.mi.vi.data.MatchData;
-import android.app.Activity;
 import android.os.Bundle;
 import android.database.Cursor;
 import android.view.Menu;
@@ -16,11 +15,9 @@ import java.text.*;
  *  
  * @author Damir Mihaljinec
  */
-public class StatisticsActivity extends Activity {
+public class StatisticsActivity extends DataActivity {
 
-	private MatchData mMatchData;
 	private Integer mMatchId;
-	private Cursor mMatchStatistics;
 	private Integer mGamesCount;
 	
 	public static final String MATCH_ID = "match_id";
@@ -34,32 +31,33 @@ public class StatisticsActivity extends Activity {
 		if (extras == null)
 			return;
 		mMatchId = extras.getInt(MATCH_ID);
-		mMatchData = new MatchData(this, mMatchId);
-        mMatchStatistics = mMatchData.getMatchStatistics();
-        mMatchStatistics.moveToFirst();
+		mData = new MatchData(this, mMatchId);
+        Cursor matchStatistics = ((MatchData)mData).getMatchStatistics();
+        matchStatistics.moveToFirst();
         
         TextView text;
         text = (TextView) findViewById(R.id.team1_sets);
-        text.setText(mMatchData.getWinnerCount(MatchData.TEAM1).toString());
+        text.setText(((MatchData)mData).getWinnerCount(MatchData.TEAM1).toString());
         text = (TextView) findViewById(R.id.team2_sets);
-        text.setText(mMatchData.getWinnerCount(MatchData.TEAM2).toString());
+        text.setText(((MatchData)mData).getWinnerCount(MatchData.TEAM2).toString());
         
         text = (TextView) findViewById(R.id.team1_points);
-        text.setText(Integer.toString(mMatchStatistics.getInt(mMatchStatistics.getColumnIndex(MatchData.GAMES_TEAM1_POINTS))));
+        text.setText(Integer.toString(matchStatistics.getInt(matchStatistics.getColumnIndex(MatchData.GAMES_TEAM1_POINTS))));
         text = (TextView) findViewById(R.id.team2_points);
-        text.setText(Integer.toString(mMatchStatistics.getInt(mMatchStatistics.getColumnIndex(MatchData.GAMES_TEAM2_POINTS))));
+        text.setText(Integer.toString(matchStatistics.getInt(matchStatistics.getColumnIndex(MatchData.GAMES_TEAM2_POINTS))));
         
         text = (TextView) findViewById(R.id.team1_declarations);
-        text.setText(Integer.toString(mMatchStatistics.getInt(mMatchStatistics.getColumnIndex(MatchData.GAMES_TEAM1_DECLARATIONS))));
+        text.setText(Integer.toString(matchStatistics.getInt(matchStatistics.getColumnIndex(MatchData.GAMES_TEAM1_DECLARATIONS))));
         text = (TextView) findViewById(R.id.team2_declarations);
-        text.setText(Integer.toString(mMatchStatistics.getInt(mMatchStatistics.getColumnIndex(MatchData.GAMES_TEAM2_DECLARATIONS))));
+        text.setText(Integer.toString(matchStatistics.getInt(matchStatistics.getColumnIndex(MatchData.GAMES_TEAM2_DECLARATIONS))));
         
-        mGamesCount = mMatchStatistics.getInt(mMatchStatistics.getColumnIndex(MatchData.GAMES_COUNT));
+        mGamesCount = matchStatistics.getInt(matchStatistics.getColumnIndex(MatchData.GAMES_COUNT));
+        matchStatistics.close();
         
         text = (TextView) findViewById(R.id.team1_all_tricks);
-        text.setText(mMatchData.getMatchAllTricks(MatchData.TEAM1).toString());
+        text.setText(((MatchData)mData).getMatchAllTricks(MatchData.TEAM1).toString());
         text = (TextView) findViewById(R.id.team2_all_tricks);
-        text.setText(mMatchData.getMatchAllTricks(MatchData.TEAM2).toString());
+        text.setText(((MatchData)mData).getMatchAllTricks(MatchData.TEAM2).toString());
         
         text = (TextView) findViewById(R.id.team1_chosen_trump);
         text.setText(getChosenTrump(MatchData.TEAM1));
@@ -95,7 +93,7 @@ public class StatisticsActivity extends Activity {
 	
 	private String getChosenTrump(Integer team) {
 		
-        Integer chosenTrump = mMatchData.getMatchPassedGames(team) + mMatchData.getMatchFallenGames(team);
+        Integer chosenTrump = ((MatchData)mData).getMatchPassedGames(team) + ((MatchData)mData).getMatchFallenGames(team);
         Double chosenTrumpPercentage = 0.0;
         if (mGamesCount != 0)
         	chosenTrumpPercentage = ((double)chosenTrump / (double)mGamesCount) * 100;
@@ -105,8 +103,8 @@ public class StatisticsActivity extends Activity {
 	
 	private String getPassedGames(Integer team) {
 		
-		Integer passedGames = mMatchData.getMatchPassedGames(team);
-        Integer chosenTrump = passedGames + mMatchData.getMatchFallenGames(team);
+		Integer passedGames = ((MatchData)mData).getMatchPassedGames(team);
+        Integer chosenTrump = passedGames + ((MatchData)mData).getMatchFallenGames(team);
         Double passedGamesPercentage = 0.0;
         if (chosenTrump != 0)
         	passedGamesPercentage = ((double)passedGames / (double)chosenTrump) * 100;

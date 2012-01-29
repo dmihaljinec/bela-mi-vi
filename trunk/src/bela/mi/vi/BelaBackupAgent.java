@@ -5,6 +5,11 @@ import android.app.backup.BackupAgentHelper;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 
+/**
+ * Backup for database and shared preferences.
+ * 
+ * @author Damir Mihaljinec
+ */
 public class BelaBackupAgent extends BackupAgentHelper {
 
 	private final static String PREFS = "shared_prefs";
