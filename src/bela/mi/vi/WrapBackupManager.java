@@ -3,6 +3,11 @@ package bela.mi.vi;
 import android.app.backup.BackupManager;
 import android.content.Context;
 
+/**
+ * Backward compatible BackupManager instance
+ * 
+ * @author Damir Mihaljinec
+ */
 public class WrapBackupManager {
 	
 	private BackupManager mInstance;

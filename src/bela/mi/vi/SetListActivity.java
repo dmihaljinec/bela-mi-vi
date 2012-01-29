@@ -1,7 +1,6 @@
 package bela.mi.vi;
 
 import bela.mi.vi.data.MatchData;
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -19,9 +18,8 @@ import android.widget.AdapterView.OnItemClickListener;
  *  
  * @author Damir Mihaljinec
  */
-public class SetListActivity extends Activity {
+public class SetListActivity extends DataActivity {
 	
-	private MatchData mMatchData;
 	private Cursor mSets;
 	private ListView mSetList;
 	private Integer mMatchId;
@@ -37,7 +35,7 @@ public class SetListActivity extends Activity {
         if (extras == null)
 			return;
 		mMatchId = extras.getInt(MATCH_ID);
-		mMatchData = new MatchData(this, mMatchId);
+		mData = new MatchData(this, mMatchId);
 		
 		mSetList = (ListView) findViewById(R.id.game_list);
 		
@@ -54,7 +52,7 @@ public class SetListActivity extends Activity {
 			}
 		});
 		
-		mSets = mMatchData.getSetsCursor();
+		mSets = ((MatchData)mData).getSetsCursor();
 		startManagingCursor(mSets);
 		String[] from = new String[] { MatchData.GAMES_TEAM1_POINTS, MatchData.GAMES_TEAM2_POINTS };
 		int[] to = new int[] { R.id.points1, R.id.points2 };

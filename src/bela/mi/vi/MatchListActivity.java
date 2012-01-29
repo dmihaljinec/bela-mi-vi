@@ -2,7 +2,6 @@ package bela.mi.vi;
 
 import bela.mi.vi.data.Data;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,9 +28,8 @@ import android.graphics.*;
  *  
  * @author Damir Mihaljinec
  */
-public class MatchListActivity extends ListActivity{
+public class MatchListActivity extends DataListActivity {
 	
-	private Data mData;
 	private Cursor mMatches;
 	private Integer mRemoveMatchId;
 	private static final Integer mHeader = 1;
@@ -78,6 +76,16 @@ public class MatchListActivity extends ListActivity{
 	}
 	
 	@Override
+	public void onDestroy() {
+		Data data = mData;
+		super.onDestroy();
+		if (data != null) {
+			data.finalClose();
+			data = null;
+		}
+	}
+	
+	@Override
 	public void onResume() {
 		
 		super.onResume();
@@ -90,7 +98,9 @@ public class MatchListActivity extends ListActivity{
 			addCursorAdapter(mListItemLimit);
 		}
 		mMatches.requery();
-		mTotalMatchCount = mData.getMatchesCursor(null).getCount();
+		Cursor matchesCursor = mData.getMatchesCursor(null);
+		mTotalMatchCount = matchesCursor.getCount();
+		matchesCursor.close();
 		showFooter();
 	}
 	
@@ -274,13 +284,15 @@ public class MatchListActivity extends ListActivity{
 	
 	private void newMatch() {
 		
-		if (mData.getPlayersCursor().getCount() < 4) {
+		Cursor playersCursor = mData.getPlayersCursor();
+		if (playersCursor.getCount() < 4) {
 			notEnoughPlayersDialog();
 		}
 		else {
 			Intent newMatchIntent = new Intent(MatchListActivity.this, NewMatchActivity.class);
 			startActivityForResult(newMatchIntent, NEW_MATCH);
 		}
+		playersCursor.close();
 	}
 	
 	private class MatchListViewBinder implements SimpleCursorAdapter.ViewBinder {

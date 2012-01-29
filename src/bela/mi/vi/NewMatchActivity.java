@@ -31,9 +31,8 @@ import java.util.Map;
  *  
  * @author Damir Mihaljinec
  */
-public class NewMatchActivity extends Activity implements OnClickListener {
+public class NewMatchActivity extends DataActivity implements OnClickListener {
 
-	private Data mData;
 	private Cursor mPlayers;
 	private String mDate;
 	private String mTime;
