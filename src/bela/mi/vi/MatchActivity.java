@@ -39,7 +39,6 @@ public class MatchActivity extends DataActivity {
 		mGameList = new GameList(this, (MatchData)mData, mMatchId, null, true, true);
 		mGameList.setOnDeleteListItemListener(new GameList.OnDeleteListItemListener() {
 			
-			@Override
 			public void onDeleteListItem() {
 				
 				setSetsResult();
