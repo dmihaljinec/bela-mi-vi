@@ -148,13 +148,11 @@ public class NewMatchActivity extends DataActivity implements OnClickListener {
 
 	private class PlayerOnItemSelectedListener implements AdapterView.OnItemSelectedListener {
 
-		@Override
 		public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 			
 			enableOkButton();
 		}
 
-		@Override
 		public void onNothingSelected(AdapterView<?> parentView) { }
 	}
 
