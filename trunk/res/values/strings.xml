@@ -25,6 +25,7 @@
 	<string name="new_player">New Player</string>
 	<string name="remove_all_players">Delete All</string>
 	<!-- Context menu -->
+	<string name="edit_player">Edit</string>
 	<string name="remove_player">Delete</string>
 	<!-- Delete player confirmation dialog -->
 	<string name="player_delete_conformation">Player will be deleted</string>
@@ -32,6 +33,8 @@
 	<string name="player_delete_all_conformation">All players will be deleted</string>
 	<!-- New player dialog -->
 	<string name="enter_player_name">Enter player name</string>
+	<!-- Edit player dialog -->
+	<string name="edit_player_name">Edit player name</string>
 	<!--  Help dialog -->
 	<string name="player_list_activity_help_message">Add a new player by pressing \'New Player\' button on top of the screen or by selecting \'New Player\' from the options menu. Player name must be unique. Players are sorted alphabetically. There is a statistical data for each player in the list which shows how many he has played and how many has he won.\n\nDelete single player by long pressing it or delete all players by selecting \'Delete All\' from the options menu.\n\nWARNING\nYou should only delete players that aren\'t connected to any match otherwise match will not be able to retrieve connection to that player.</string>
 
@@ -111,6 +114,6 @@
 	<!-- AboutDialog -->
 	<string name="about">About</string>
 	<string name="version">Version</string>
-	<string name="author">© Damir Mihaljinec 2011. - 2012. </string>
+	<string name="author">© Damir Mihaljinec 2011. - 2013. </string>
 	<string name="web">http://code.google.com/p/bela-mi-vi/</string>
 </resources>

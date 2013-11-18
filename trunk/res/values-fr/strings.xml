@@ -25,6 +25,7 @@
 	<string name="new_player">Nouveau Joueur</string>
 	<string name="remove_all_players">Supprimer toutes les</string>
 	<!-- Context menu -->
+	<string name="edit_player">Modifier</string>
 	<string name="remove_player">Supprimer</string>
 	<!-- Delete player confirmation dialog -->
 	<string name="player_delete_conformation">Le joueur sera supprimé</string>
@@ -61,6 +62,8 @@
 
 	<!-- GameList -->
 	<string name="new_game">Nouveaux Jeux</string>
+	<string name="new_edit_game">Modifier Jeux</string>
+	<string name="edit_game">Modifier</string>
 	<!-- Delete game confirmation dialog -->
 	<string name="remove_game">Supprimer</string>
 	<string name="game_delete_conformation">Le jeu sera supprimé</string>

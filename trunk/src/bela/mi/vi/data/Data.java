@@ -161,6 +161,20 @@ public class Data {
 		return true;
 	}
 	
+	public boolean editPlayer(Integer id, String name) {
+		
+		ContentValues values = new ContentValues();
+		values.put(Data.PLAYERS_NAME, name);
+		String whereClause = Data.PLAYERS_ID + "=" + id.toString();
+		try {
+			mBelaOpenHandler.getWritableDatabase().update(Data.TABLE_PLAYERS, values, whereClause, null);
+		}
+		catch (SQLiteException e) {
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean removeAllPlayers() {
 		
 		try {

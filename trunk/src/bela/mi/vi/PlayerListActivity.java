@@ -1,6 +1,7 @@
 package bela.mi.vi;
 
 import java.text.DecimalFormat;
+import java.util.HashSet;
 
 import bela.mi.vi.data.Data;
 import android.app.AlertDialog;
@@ -14,12 +15,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.DialogInterface;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 
 /**
  * This activity handles list of players.
@@ -31,6 +35,7 @@ public class PlayerListActivity extends DataListActivity {
 	private Cursor mPlayers;
 	private Integer mRemovePlayerId;
 	private Integer mHeader = 1;
+	private HashSet<String> mPlayerNames = new HashSet<String>();
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class PlayerListActivity extends DataListActivity {
 		adapter.setViewBinder(new PlayerListViewBinder(getResources().getString(R.string.winning_rate)));
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
+		recreatePlayerNames();
 	}
 	
 	@Override
@@ -117,29 +123,56 @@ public class PlayerListActivity extends DataListActivity {
 		
 		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
 		switch (item.getItemId()) {
-		case R.id.remove_player:
-			Cursor cursor = (Cursor) getListAdapter().getItem(info.position - mHeader);
-			mRemovePlayerId = cursor.getInt(cursor.getColumnIndex(Data.PLAYERS_ID));
-			confirmDeleteDialog();
-			return true;
-		default:
-			return super.onContextItemSelected(item);
+			case R.id.remove_player: {
+				Cursor cursor = (Cursor) getListAdapter().getItem(info.position - mHeader);
+				mRemovePlayerId = cursor.getInt(cursor.getColumnIndex(Data.PLAYERS_ID));
+				confirmDeleteDialog();
+				return true;
+			}
+			case R.id.edit_player: {
+				Cursor cursor = (Cursor) getListAdapter().getItem(info.position - mHeader);
+				Integer playerId = cursor.getInt(cursor.getColumnIndex(Data.PLAYERS_ID));
+				String playerName = cursor.getString(cursor.getColumnIndex(Data.PLAYERS_NAME));
+				editPlayerDialog(playerId, playerName);
+				return true;
+			}
+			default:
+				return super.onContextItemSelected(item);
 		}
 	}
 	
 	public void newPlayerDialog() {
 		
+		newOrEditPlayerDialog(getResources().getString(R.string.enter_player_name), null, null);
+	}
+	
+	public void editPlayerDialog(final Integer playerId, final String playerName) {
+		
+		newOrEditPlayerDialog(getResources().getString(R.string.edit_player_name), playerId, playerName);
+	}
+	
+	public void newOrEditPlayerDialog(final String title, final Integer playerId, final String playerName) {
+		
 		AlertDialog.Builder alert = new AlertDialog.Builder(this);
 		final EditText input = new EditText(this);
 		input.setRawInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-		alert.setTitle(getResources().getString(R.string.enter_player_name));
-		alert.setIcon(android.R.drawable.ic_menu_add);
+		if (playerName != null) {
+			input.setText(playerName);
+			input.setSelection(playerName.length());
+		}
+		alert.setTitle(title);
 		alert.setView(input);
 		alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				String name = input.getText().toString().trim();
-				mData.addPlayer(name);
+				if (playerId == null) {
+					mData.addPlayer(name);
+				}
+				else {
+					mData.editPlayer(playerId, name);
+				}
 				mPlayers.requery();
+				recreatePlayerNames();
 			}
 		}); 
 		alert.setNegativeButton(this.getResources().getString(R.string.cancel), new DialogInterface.OnClickListener() {
@@ -147,7 +180,28 @@ public class PlayerListActivity extends DataListActivity {
 				dialog.cancel();
 			}
 		});
-		alert.show();
+		final AlertDialog alertDialog = alert.create();
+		input.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			
+			@Override
+			public void afterTextChanged(Editable input) {
+				final Button okButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+				if (invalidPlayerName(input.toString())) {
+					okButton.setEnabled(false);
+					return;
+				}
+				okButton.setEnabled(true);
+			}
+		});
+		alertDialog.show();
+		final Button okButton = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+		okButton.setEnabled(false);
 	}
 	
 	public void confirmDeleteAllDialog() {
@@ -160,6 +214,7 @@ public class PlayerListActivity extends DataListActivity {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				mData.removeAllPlayers();
 				mPlayers.requery();
+				recreatePlayerNames();
 			}
 		}); 
 		alert.setNegativeButton(this.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -180,6 +235,7 @@ public class PlayerListActivity extends DataListActivity {
 			public void onClick(DialogInterface dialog, int whichButton) {
 				mData.removePlayer(mRemovePlayerId);
 				mPlayers.requery();
+				recreatePlayerNames();
 			}
 		}); 
 		alert.setNegativeButton(this.getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -188,6 +244,24 @@ public class PlayerListActivity extends DataListActivity {
 			}
 		});
 		alert.show();
+	}
+	
+	private boolean invalidPlayerName(final String newPlayerName) {
+		if (newPlayerName.contentEquals("")) {
+			return true;
+		}
+		return mPlayerNames.contains(newPlayerName);
+	}
+	
+	private void recreatePlayerNames() {
+		mPlayerNames.clear();
+		final Cursor cursor = mData.getPlayersCursor();
+		cursor.moveToFirst();
+		while(!cursor.isAfterLast()) {
+			mPlayerNames.add(cursor.getString(cursor.getColumnIndex(Data.PLAYERS_NAME)));
+			cursor.moveToNext();
+		}
+		cursor.close();
 	}
 	
 	private class PlayerListViewBinder implements SimpleCursorAdapter.ViewBinder {

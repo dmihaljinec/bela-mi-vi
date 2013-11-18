@@ -25,6 +25,7 @@
 	<string name="new_player">Novi igrač</string>
 	<string name="remove_all_players">Obriši sve</string>
 	<!-- Context menu -->
+	<string name="edit_player">Uredi</string>
 	<string name="remove_player">Obriši</string>
 	<!-- Delete player confirmation dialog -->
 	<string name="player_delete_conformation">Igrač će biti obrisan</string>
@@ -32,6 +33,8 @@
 	<string name="player_delete_all_conformation">Svi igrači će biti obrisani</string>
 	<!-- New player dialog -->
 	<string name="enter_player_name">Unesite ime igrača</string>
+	<!-- Edit player dialog -->
+	<string name="edit_player_name">Uredite ime igrača</string>
 	<!--  Help dialog -->
 	<string name="player_list_activity_help_message">Dodajte novog igrača pritiskom na tipku \'Novi igrač\' koja se nalazi pri vrhu ekrana ili odaberite \'Novi igrač\' iz izbornika. Ime igrača mora biti jedinstveno. Igrači u listi su poredani abecedno prema imenu. Za svakog igrača u listi prikazuje se statistika koliko je partija dobio od ukupno odigranih partija.\n\nBrisanje pojedinog igrača moguće je dugim pristiskom na željenog igrača u listi, a za brisanje svih igrača odaberite \'Obriši sve\' iz izbornika.\n\nUPOZORENJE\nBrišite igrače koji nisu povezani sa nekim mečem, jer u suprotnom meč će nepovratno izgubiti informaciju o igraču.</string>
 
