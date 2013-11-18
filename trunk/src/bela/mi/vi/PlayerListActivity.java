@@ -160,6 +160,9 @@ public class PlayerListActivity extends DataListActivity {
 			input.setText(playerName);
 			input.setSelection(playerName.length());
 		}
+		else {
+			alert.setIcon(android.R.drawable.ic_menu_add);
+		}
 		alert.setTitle(title);
 		alert.setView(input);
 		alert.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
