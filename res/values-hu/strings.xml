@@ -25,6 +25,7 @@
 	<string name="new_player">Új játékos</string>
 	<string name="remove_all_players">Töröld mind</string>
 	<!-- Context menu -->
+	<string name="edit_player">Szerkeszt</string>
 	<string name="remove_player">Töröld</string>
 	<!-- Delete player confirmation dialog -->
 	<string name="player_delete_conformation">Játékos törölve</string>
@@ -61,6 +62,8 @@
 
 	<!-- GameList -->
 	<string name="new_game">Új játék</string>
+	<string name="new_edit_game">Szerkeszt játék</string>
+	<string name="edit_game">Szerkeszt</string>
 	<!-- Delete game confirmation dialog -->
 	<string name="remove_game">Töröld</string>
 	<string name="game_delete_conformation">A játék törölve</string>
