@@ -1,0 +1,1 @@
+Android application that stores results for Bela (Belot, Belote) card game.
